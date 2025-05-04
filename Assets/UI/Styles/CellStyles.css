@@ -1,0 +1,17 @@
+/* Style for all cell elements */
+.cell {
+    width: 100px;   /* Adjust the size as needed */
+    height: 100px;  /* Adjust the size as needed */
+    border-width: 3px;  /* Border thickness */
+    border-style: solid; 
+    border-color: #333;  /* Dark gray border */
+    background-color: rgba(255, 255, 255, 0.1); /* Slight background tint */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: 1px;  /* Space between cells */
+}
+
+.cell:hover {
+    border-color: #ff6600; /* Orange on hover */
+}

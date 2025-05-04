@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Screen" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/EterraPocket/Images/demo_start_background.png?fileID=2800000&amp;guid=f03fd9cf1ef5f464b9ba515b540dde94&amp;type=3#demo_start_background&apos;);">
+        <ui:VisualElement name="TopBound" style="flex-grow: 0; height: 100px; flex-direction: column; flex-shrink: 0; background-size: 100% 100%; justify-content: center; max-height: 100px;">
+            <ui:Button text="Faucet" name="BtnFaucet" />
+            <ui:VisualElement style="flex-grow: 1;" />
+            <ui:VisualElement style="flex-grow: 1;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="FloatBody" style="flex-grow: 1; height: 100%; flex-shrink: 1; width: 100%;" />
+        <ui:VisualElement name="BottomBound" style="flex-grow: 0; height: 200px; background-size: 100% 250px;" />
+    </ui:VisualElement>
+</ui:UXML>

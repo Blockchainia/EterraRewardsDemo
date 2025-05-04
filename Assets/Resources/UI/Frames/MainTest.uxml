@@ -1,0 +1,22 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Screen" style="flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: 1; font-size: 50px; -unity-font-definition: url(&apos;project://database/Assets/EterraPocket/Fonts/matrix%203.ttf?fileID=12800000&amp;guid=8baed8cd294c1452987b9f72eefbdd7e&amp;type=3#matrix 3&apos;); -unity-text-align: upper-center;">
+            <ui:Label text="Web3 Test&#10;" name="lblMenu" style="background-color: rgb(101, 100, 100);" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement style="flex-grow: 1; width: 10px;" />
+            <ui:VisualElement name="ButtonHolder" style="flex-grow: 1;">
+                <ui:VisualElement style="flex-grow: 1; -unity-text-align: upper-center; align-items: flex-start;">
+                    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                        <ui:Button text="Transfer" name="BtnTransfer" style="-unity-font-definition: url(&apos;project://database/Assets/EterraPocket/Fonts/matrix%203.ttf?fileID=12800000&amp;guid=8baed8cd294c1452987b9f72eefbdd7e&amp;type=3#matrix 3&apos;); font-size: 40px; height: 100px;" />
+                        <ui:Label text="Label" name="lblTransfer" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                        <ui:Button text="Create" name="BtnCreateGame" style="-unity-font-definition: url(&apos;project://database/Assets/EterraPocket/Fonts/matrix%203.ttf?fileID=12800000&amp;guid=8baed8cd294c1452987b9f72eefbdd7e&amp;type=3#matrix 3&apos;); font-size: 40px; height: 100px;" />
+                        <ui:Label text="Label" name="lblCreateGame" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

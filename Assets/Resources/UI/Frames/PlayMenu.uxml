@@ -1,0 +1,22 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Body" style="flex-grow: 0; background-image: none; background-size: 100% 100%; flex-shrink: 0; width: 100%; height: 1697px; background-color: rgba(84, 84, 84, 0); align-items: center;">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-size: 100% 15%;">
+            <ui:Label text="Menu" name="lblMenu" style="align-items: auto; -unity-text-align: middle-center; -unity-text-outline-width: 4px; color: rgb(164, 0, 0); -unity-font-style: bold; -unity-font-definition: url(&apos;project://database/Assets/EterraPocket/Fonts/matrix%203.ttf?fileID=12800000&amp;guid=8baed8cd294c1452987b9f72eefbdd7e&amp;type=3#matrix 3&apos;); font-size: 60px; justify-content: flex-start; -unity-text-outline-color: rgb(0, 0, 0); text-shadow: 2px 2px 10px rgb(0, 0, 0);" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-size: 100% 5%;">
+            <ui:Button text="Connecting..." name="BtnPlay" style="height: 100px; font-size: 50px; width: 300px;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-size: 100% 5%;">
+            <ui:Button text="History" name="BtnHistory" style="height: 100px; font-size: 45px; max-width: none; width: 300px;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-size: 100% 5%;">
+            <ui:Button text="Exit" name="BtnExit" style="height: 100px; font-size: 50px; max-width: none; width: 300px;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-size: 100% 5%;">
+            <ui:Label text="Eterra v0.0.1" style="-unity-text-align: upper-center; background-color: rgb(55, 55, 55); -unity-text-outline-color: rgba(221, 0, 0, 0); color: rgb(214, 0, 0); font-size: 40px;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-size: 100% 10%; background-color: rgba(0, 0, 0, 0);">
+            <ui:Label text="...waiting..." name="LblExtrinsicUpdate" style="-unity-text-align: upper-center; font-size: 30px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

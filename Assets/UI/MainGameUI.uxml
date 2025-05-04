@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="StartScreenUI" src="project://database/Assets/UI/StartScreenUI.uxml?fileID=9197481963319205126&amp;guid=b540c076f118442e0969671237199f1a&amp;type=3#StartScreenUI" />
+    <ui:VisualElement name="VelContainer" style="flex-grow: 1; width: 100%; height: 100%;">
+        <ui:VisualElement name="VelTopFiller" style="flex-grow: 0; width: 100%; height: 2%; flex-shrink: 0;" />
+        <ui:Instance template="StartScreenUI" name="StartScreenUI" style="height: 101px;" />
+    </ui:VisualElement>
+</ui:UXML>
