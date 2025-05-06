@@ -1,43 +1,79 @@
-using Eterra.NetApiExt.Generated.Model.pallet_eterra.types.game;
-using Eterra.NetApiExt.Generated.Model.pallet_eterra.types.card;
-using Eterra.NetApiExt.Generated.Model.sp_core.crypto;
-using Eterra.NetApiExt.Generated.Types.Base;
 using Substrate.NetApi.Model.Types.Primitive;
-using Substrate.NetApi.Model.Types.Base;
 using System;
 using System.Linq;
-using Eterra.Integration.Helpers; // ✅ Importing BaseVecHelper
+using System.Threading;
+using System.Threading.Tasks;
+using Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet;
+using Eterra.NetApiExt.Generated.Model.sp_core.crypto;
+using Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec;
+using Eterra.NetApiExt.Generated.Storage;
+using Eterra.Engine.Helper;
+using Substrate.NetApi.Model.Types.Base;
+using Eterra.Engine.Models;
+using UnityEngine;
+using Assets.Scripts;
+using Eterra.Integration.Helper;
 
-namespace Eterra.Integration.Model
+
+namespace Eterra.Engine.Logic
 {
-  public class GameSharp
+  public static class GameSharp
   {
-    public GameSharp(byte[] gameId, Eterra.NetApiExt.Generated.Model.pallet_eterra.types.game.Game game)
+    public static int CurrentDailyRollsCount { get; private set; } = 0;
+    public static RollResult[] CurrentDailyRolls { get; private set; } = Array.Empty<RollResult>();
+
+    public static async Task UpdateRollHistory(SubstrateNetwork substrate, CancellationToken token)
     {
-      GameId = gameId;
-      State = game.State.Value;
-      LastPlayedBlock = game.LastPlayedBlock.Value;
+      if (substrate == null || !substrate.IsConnected)
+      {
+        Debug.LogError("[GameSharp] Substrate client not connected.");
+        return;
+      }
 
-      // ✅ Convert `BoundedVecT5` to `BaseVec<AccountId32>` before calling the helper
-      Players = BaseVecHelper.ToArray<AccountId32>(new BaseVec<AccountId32>(game.Players.Value));
+      try
+      {
+        var player = Generic.ToAccountId32(substrate.Account);
 
-      PlayerTurn = game.PlayerTurn.Value;
-      Round = game.Round.Value;
-      MaxRounds = game.MaxRounds.Value;
-      Scores = (((U8)game.Scores.Value[0]).Value, ((U8)game.Scores.Value[1]).Value);
-      PlayerColors = ((EnumColor)game.PlayerColors.Value[0], (EnumColor)game.PlayerColors.Value[1]);
-      Board = new Board(game.Board);
+        var history = await substrate.ApiClient.GetStorageAsync<BoundedVecT8>(
+            EterraDailySlotsStorage.RollHistoryParams(player), null, token);
+
+        if (history?.Value != null)
+        {
+          var rawRolls = BaseVecHelper.ToArray<RollResult>(history.Value);
+          var today = DateTime.UtcNow.Date;
+
+          var todayRolls = rawRolls
+              .Where(r =>
+              {
+                  try
+                  {
+                      var timestampSeconds = ((U64)r.Timestamp).Value;
+                      var dateTime = DateTimeOffset.FromUnixTimeSeconds((long)timestampSeconds).UtcDateTime;
+                      return dateTime.Date == today;
+                  }
+                  catch
+                  {
+                      return false;
+                  }
+              })
+              .ToArray();
+
+          CurrentDailyRolls = todayRolls;
+          CurrentDailyRollsCount = todayRolls.Length;
+
+          Debug.Log($"[GameSharp] Updated roll history. Today's rolls: {CurrentDailyRollsCount}");
+        }
+        else
+        {
+          Debug.LogWarning("[GameSharp] No roll history found.");
+          CurrentDailyRolls = Array.Empty<RollResult>();
+          CurrentDailyRollsCount = 0;
+        }
+      }
+      catch (Exception ex)
+      {
+        Debug.LogError($"[GameSharp] Error updating roll history: {ex}");
+      }
     }
-
-    public byte[] GameId { get; private set; }
-    public GameState State { get; private set; }
-    public uint LastPlayedBlock { get; private set; }
-    public AccountId32[] Players { get; private set; }
-    public byte PlayerTurn { get; private set; }
-    public byte Round { get; private set; }
-    public byte MaxRounds { get; private set; }
-    public Board Board { get; private set; }
-    public (byte Player1Score, byte Player2Score) Scores { get; private set; }
-    public (Color Player1Color, Color Player2Color) PlayerColors { get; private set; }
   }
 }
