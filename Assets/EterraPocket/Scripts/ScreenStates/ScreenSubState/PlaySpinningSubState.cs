@@ -1,8 +1,10 @@
+using Eterra.Engine.Models;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections;
 using System.Threading;
 using System.Linq;
+using System.Threading.Tasks;
 using Eterra.Engine.Helper; // where Generic lives
 using Substrate.NetApi.Model.Rpc; // brings in EventRecord
 using Eterra.NetApiExt.Generated.Model.solochain_template_runtime;
@@ -10,6 +12,10 @@ using Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet;
 using Eterra.NetApiExt.Generated.Model.sp_core.crypto; // for AccountId32
 using Assets.Scripts;
 using Eterra.Integration.Helper;
+using Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec;
+using Eterra.NetApiExt.Generated.Storage;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Primitive;
 
 namespace Assets.Scripts.ScreenStates
 {
@@ -244,10 +250,55 @@ namespace Assets.Scripts.ScreenStates
       {
         var spinSubId = await _substrate.SpinSlotAsync(player, 1, token);
         Debug.Log($"[Spin] Triggered from EnterState. Subscription ID: {spinSubId}");
+        await FetchAndDisplayLatestRoll();
       }
       catch (System.Exception ex)
       {
         Debug.LogError($"[Spin] Failed to initiate spin from EnterState: {ex}");
+      }
+    }
+
+    private async Task FetchAndDisplayLatestRoll()
+    {
+      try
+      {
+        var player = Generic.ToAccountId32(_substrate.Account);
+        var history = await _substrate.ApiClient.GetStorageAsync<BoundedVecT8>(
+            EterraDailySlotsStorage.RollHistoryParams(player), null, _cancellationToken);
+
+        if (history?.Value != null)
+        {
+          var rawRolls = BaseVecHelper.ToArray<RollResult>(history.Value);
+          var summary = WeeklyRollSummary.FromRaw(rawRolls);
+
+          var latestRoll = summary.Rolls
+              .OrderByDescending(r => r.Timestamp)
+              .FirstOrDefault();
+
+          if (latestRoll?.Result != null && latestRoll.Result.Count >= 3)
+          {
+            UnityMainThreadDispatcher.Instance().Enqueue(() =>
+            {
+              _slot1.Q<Label>("LblSlot1").text = latestRoll.Result[0].ToString();
+              _slot2.Q<Label>("LblSlot2").text = latestRoll.Result[1].ToString();
+              _slot3.Q<Label>("LblSlot3").text = latestRoll.Result[2].ToString();
+            });
+
+            Debug.Log($"[Spin] Displayed latest roll: {string.Join(", ", latestRoll.Result)}");
+          }
+          else
+          {
+            Debug.LogWarning("[Spin] No valid roll result to display.");
+          }
+        }
+        else
+        {
+          Debug.LogWarning("[Spin] No roll history found.");
+        }
+      }
+      catch (System.Exception ex)
+      {
+        Debug.LogError($"[Spin] Failed to fetch/display roll history: {ex}");
       }
     }
   }
