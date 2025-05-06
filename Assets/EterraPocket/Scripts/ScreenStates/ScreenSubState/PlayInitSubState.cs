@@ -13,6 +13,7 @@ namespace Assets.Scripts.ScreenStates
     private Label _lblTitle;
     private VisualElement _instantWinDisplay;
     private VisualElement _rewardHistory;
+    private Button _btnSpin;
 
     public PlayInitSubState(GameController flowController, GameBaseState parent)
         : base(flowController, parent) { }
@@ -37,6 +38,17 @@ namespace Assets.Scripts.ScreenStates
       if (_instantWinDisplay == null) Debug.LogError("[UI] InstantWinDisplay not found");
       if (_rewardHistory == null) Debug.LogError("[UI] RewardHistory not found");
 
+      _btnSpin = _slotArmHolder.Q<Button>("BtnSpin");
+      if (_btnSpin == null)
+      {
+        Debug.LogError("[UI] BtnSpin not found!");
+      }
+      else
+      {
+        _btnSpin.clicked += OnSpinClicked;
+        _btnSpin.SetEnabled(true);
+      }
+
       InitializeDisplay();
     }
 
@@ -55,6 +67,15 @@ namespace Assets.Scripts.ScreenStates
     public override void ExitState()
     {
       Debug.Log($"[{this.GetType().Name}][SUB] ExitState");
+      if (_btnSpin != null)
+        _btnSpin.clicked -= OnSpinClicked;
+    }
+
+    private void OnSpinClicked()
+    {
+      Debug.Log("[UI] Spin button clicked. Transitioning to PlaySpinningSubState.");
+      _btnSpin.SetEnabled(false);
+      FlowController.ChangeScreenSubState(GameScreen.PlayScreen, GameSubScreen.PlaySpinning);
     }
   }
 }
