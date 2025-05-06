@@ -1,6 +1,15 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections;
+using System.Threading;
+using System.Linq;
+using Eterra.Engine.Helper; // where Generic lives
+using Substrate.NetApi.Model.Rpc; // brings in EventRecord
+using Eterra.NetApiExt.Generated.Model.solochain_template_runtime;
+using Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet;
+using Eterra.NetApiExt.Generated.Model.sp_core.crypto; // for AccountId32
+using Assets.Scripts;
+using Eterra.Integration.Helper;
 
 namespace Assets.Scripts.ScreenStates
 {
@@ -14,6 +23,8 @@ namespace Assets.Scripts.ScreenStates
     private VisualElement _instantWinDisplay;
     private VisualElement _rewardHistory;
     private Button _btnSpin;
+    private SubstrateNetwork _substrate;
+    private CancellationToken _cancellationToken;
 
     public PlaySpinningSubState(GameController flowController, GameBaseState parent)
         : base(flowController, parent)
@@ -26,6 +37,9 @@ namespace Assets.Scripts.ScreenStates
       Debug.Log($"[{this.GetType().Name}][SUB] EnterState");
 
       var root = FlowController.VelContainer.Q<VisualElement>("Screen");
+
+      _substrate = (FlowController as GameController)?.Substrate;
+      _cancellationToken = (FlowController as GameController)?.CancellationToken ?? CancellationToken.None;
 
       _lblTitle = root.Q<Label>("LblTitle");
       if (_lblTitle != null)
@@ -108,6 +122,7 @@ namespace Assets.Scripts.ScreenStates
       }
 
       InitializeGameState();
+      TriggerSlotSpinAsync();
     }
 
     private void InitializeGameState()
@@ -136,10 +151,72 @@ namespace Assets.Scripts.ScreenStates
       }
     }
 
-    private void OnSpinClicked()
+    private async void OnSpinClicked()
     {
-      Debug.Log("Spin button clicked. Placeholder handler.");
-      // Placeholder for spin button click logic
+      Debug.Log("Spin button clicked.");
+
+      if (_substrate == null || !_substrate.IsConnected)
+      {
+        Debug.LogError("Not connected to Substrate network.");
+        return;
+      }
+
+      var player = Generic.ToAccountId32(_substrate.Account);
+      var token = _cancellationToken;
+
+      try
+      {
+        var spinSubId = await _substrate.SpinSlotAsync(player, 1, token);
+        Debug.Log($"SpinSlotAsync submitted. Subscription ID: {spinSubId}");
+        Debug.Log($"[Spin] Submitted extrinsic. Subscription ID: {spinSubId}");
+
+        _substrate.ExtrinsicManager.ExtrinsicUpdated += async (id, info) =>
+        {
+          Debug.Log($"[Spin] ExtrinsicUpdate triggered. ID: {id}, Status: {info.TransactionEvent}");
+          if (id != spinSubId || !(info.IsInBlock || info.IsCompleted)) return;
+
+          Debug.Log("Spin extrinsic finalized or in block.");
+
+          if (info.EventRecords != null)
+          {
+            Debug.Log($"[Spin] Processing {info.EventRecords.Count} event records.");
+            foreach (var rec in info.EventRecords)
+            {
+              Debug.Log($"[Spin] Event type: {rec.Event?.GetType().Name}");
+              if (rec.Event is { } runtimeEvent &&
+                  runtimeEvent.GetType().Name == typeof(RuntimeEvent).Name)
+              {
+                var rtField = rec.Event.GetType().GetField("_decodedValue", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                var palletEnumEv = rtField?.GetValue(rec.Event) as Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.EnumEvent;
+                if (palletEnumEv == null || palletEnumEv.Value != Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Event.SlotRolled)
+                  return;
+
+                Debug.Log($"[Spin] Decoded pallet event: {palletEnumEv.Value}");
+
+                var evField = palletEnumEv.GetType().GetField("_decodedValue", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                var tuple = evField?.GetValue(palletEnumEv) as Substrate.NetApi.Model.Types.Base.BaseTuple<Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32, Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U32>>;
+                if (tuple?.Value == null || tuple.Value.Length < 2) continue;
+
+                var reelsVec = (Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U32>)tuple.Value[1];
+                var reels = reelsVec.Value.Select(x => x.Value).ToArray();
+
+                Debug.Log($"[Spin] Final reel results: {string.Join(", ", reels)}");
+
+                UnityMainThreadDispatcher.Instance().Enqueue(() =>
+                {
+                  _slot1.Q<Label>("LblSlot1").text = reels.Length > 0 ? reels[0].ToString() : "?";
+                  _slot2.Q<Label>("LblSlot2").text = reels.Length > 1 ? reels[1].ToString() : "?";
+                  _slot3.Q<Label>("LblSlot3").text = reels.Length > 2 ? reels[2].ToString() : "?";
+                });
+              }
+            }
+          }
+        };
+      }
+      catch (System.Exception ex)
+      {
+        Debug.LogError($"[Spin] Exception during spin handling: {ex}");
+      }
     }
 
     public override void ExitState()
@@ -149,6 +226,28 @@ namespace Assets.Scripts.ScreenStates
       if (_btnSpin != null)
       {
         _btnSpin.clicked -= OnSpinClicked;
+      }
+    }
+
+    private async void TriggerSlotSpinAsync()
+    {
+      if (_substrate == null || !_substrate.IsConnected)
+      {
+        Debug.LogError("[Spin] Substrate not connected.");
+        return;
+      }
+
+      var player = Generic.ToAccountId32(_substrate.Account);
+      var token = _cancellationToken;
+
+      try
+      {
+        var spinSubId = await _substrate.SpinSlotAsync(player, 1, token);
+        Debug.Log($"[Spin] Triggered from EnterState. Subscription ID: {spinSubId}");
+      }
+      catch (System.Exception ex)
+      {
+        Debug.LogError($"[Spin] Failed to initiate spin from EnterState: {ex}");
       }
     }
   }
