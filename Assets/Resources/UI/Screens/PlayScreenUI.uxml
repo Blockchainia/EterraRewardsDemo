@@ -1,23 +1,44 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Screen" style="flex-grow: 1;">
-        <ui:VisualElement name="TopBound" style="flex-grow: 1; width: 100%; height: 5%;" />
-        <ui:VisualElement name="FloatBody" style="flex-grow: 1; height: 90%; width: 100%;">
-            <ui:VisualElement name="TitleHolder" style="flex-grow: 1; height: 15%;">
-                <ui:Label tabindex="-1" text="Eterra Rewards" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LblTitle" style="-unity-font-style: bold; font-size: 20px; -unity-text-align: upper-center;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="SlotMachineHolder" style="flex-grow: 1; height: 85%; flex-direction: row;">
-                <ui:VisualElement name="SlotHolder" style="flex-grow: 1; flex-direction: row; height: 100%; width: 85%;">
-                    <ui:VisualElement name="Slot1" style="flex-grow: 1; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
-                    <ui:VisualElement name="Slot2" style="flex-grow: 1;" />
-                    <ui:VisualElement name="Slot3" style="flex-grow: 1;" />
-                </ui:VisualElement>
-                <ui:VisualElement name="SlotArmHolder" style="flex-grow: 1; width: 16%;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="InformationPanel" style="flex-grow: 1; height: 50%;">
-                <ui:VisualElement name="InstantWinDisplau" style="flex-grow: 1; height: 50%;" />
-                <ui:VisualElement name="RewardHistory" style="flex-grow: 1; height: 59px;" />
-            </ui:VisualElement>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+  <ui:VisualElement name="Screen" style="flex-grow: 1;">
+    <ui:VisualElement name="TopBound" style="flex-grow: 1; width: 100%; height: 5%;" />
+    <ui:VisualElement name="FloatBody" style="flex-grow: 1; height: 90%; width: 100%; flex-direction: column;">
+      
+      <ui:VisualElement name="TitleHolder" style="flex-grow: 1; height: 15%;">
+        <ui:Label name="LblTitle" text="Eterra Rewards" style="-unity-font-style: bold; font-size: 20px; -unity-text-align: upper-center;" />
+      </ui:VisualElement>
+
+      <ui:VisualElement name="SlotMachineHolder" style="flex-grow: 1; height: 70%; flex-direction: row;">
+        
+        <ui:VisualElement name="SlotHolder" style="flex-grow: 1; flex-direction: row; height: 100%; width: 85%;">
+          <ui:VisualElement name="Slot1" style="flex-grow: 1; justify-content: center; align-items: center;">
+            <ui:Label name="LblSlot1" text="?" style="font-size: 30px; -unity-text-align: middle-center;" />
+          </ui:VisualElement>
+          <ui:VisualElement name="Slot2" style="flex-grow: 1; justify-content: center; align-items: center;">
+            <ui:Label name="LblSlot2" text="?" style="font-size: 30px; -unity-text-align: middle-center;" />
+          </ui:VisualElement>
+          <ui:VisualElement name="Slot3" style="flex-grow: 1; justify-content: center; align-items: center;">
+            <ui:Label name="LblSlot3" text="?" style="font-size: 30px; -unity-text-align: middle-center;" />
+          </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="BottomBound" style="flex-grow: 1; width: 100%; height: 5%;" />
+
+        <ui:VisualElement name="SlotArmHolder" style="flex-grow: 1; width: 16%; justify-content: center; align-items: center;">
+          <ui:Button name="BtnSpin" text="Spin!" style="width: 80%; height: 40px;" />
+        </ui:VisualElement>
+
+      </ui:VisualElement>
+
+      <ui:VisualElement name="InformationPanel" style="flex-grow: 1; height: 15%; flex-direction: column;">
+        <ui:Label name="LblStatus" text="Waiting..." style="font-size: 16px; -unity-text-align: middle-center;" />
+        
+        <!-- New Element: Initially hidden -->
+        <ui:VisualElement name="InstantWinDisplay" style="display: none; flex-grow: 1; justify-content: center; align-items: center;">
+          <ui:Label name="LblWinMessage" text="🎉 You Win! 🎉" style="font-size: 20px; color: green; -unity-text-align: middle-center;" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="RewardHistory" style="flex-grow: 1; height: 59px;" />
+      </ui:VisualElement>
+
     </ui:VisualElement>
+    <ui:VisualElement name="BottomBound" style="flex-grow: 1; width: 100%; height: 5%;" />
+  </ui:VisualElement>
 </ui:UXML>

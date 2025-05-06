@@ -184,7 +184,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT1">
             <summary>
-            >> 71 - Composite[bounded_collections.bounded_vec.BoundedVecT1]
+            >> 74 - Composite[bounded_collections.bounded_vec.BoundedVecT1]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT1.Value">
@@ -201,9 +201,28 @@
         <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT1.Decode(System.Byte[],System.Int32@)">
             <inheritdoc/>
         </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT10">
+            <summary>
+            >> 156 - Composite[bounded_collections.bounded_vec.BoundedVecT10]
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT10.Value">
+            <summary>
+            >> value
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT10.TypeName">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT10.Encode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT10.Decode(System.Byte[],System.Int32@)">
+            <inheritdoc/>
+        </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT2">
             <summary>
-            >> 96 - Composite[bounded_collections.bounded_vec.BoundedVecT2]
+            >> 99 - Composite[bounded_collections.bounded_vec.BoundedVecT2]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT2.Value">
@@ -222,7 +241,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT3">
             <summary>
-            >> 99 - Composite[bounded_collections.bounded_vec.BoundedVecT3]
+            >> 102 - Composite[bounded_collections.bounded_vec.BoundedVecT3]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT3.Value">
@@ -241,7 +260,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT4">
             <summary>
-            >> 103 - Composite[bounded_collections.bounded_vec.BoundedVecT4]
+            >> 106 - Composite[bounded_collections.bounded_vec.BoundedVecT4]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT4.Value">
@@ -260,7 +279,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT5">
             <summary>
-            >> 131 - Composite[bounded_collections.bounded_vec.BoundedVecT5]
+            >> 136 - Composite[bounded_collections.bounded_vec.BoundedVecT5]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT5.Value">
@@ -277,9 +296,85 @@
         <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT5.Decode(System.Byte[],System.Int32@)">
             <inheritdoc/>
         </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT6">
+            <summary>
+            >> 145 - Composite[bounded_collections.bounded_vec.BoundedVecT6]
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT6.Value">
+            <summary>
+            >> value
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT6.TypeName">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT6.Encode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT6.Decode(System.Byte[],System.Int32@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT7">
+            <summary>
+            >> 147 - Composite[bounded_collections.bounded_vec.BoundedVecT7]
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT7.Value">
+            <summary>
+            >> value
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT7.TypeName">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT7.Encode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT7.Decode(System.Byte[],System.Int32@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT8">
+            <summary>
+            >> 152 - Composite[bounded_collections.bounded_vec.BoundedVecT8]
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT8.Value">
+            <summary>
+            >> value
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT8.TypeName">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT8.Encode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT8.Decode(System.Byte[],System.Int32@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT9">
+            <summary>
+            >> 154 - Composite[bounded_collections.bounded_vec.BoundedVecT9]
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT9.Value">
+            <summary>
+            >> value
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT9.TypeName">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT9.Encode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec.BoundedVecT9.Decode(System.Byte[],System.Int32@)">
+            <inheritdoc/>
+        </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.bounded_collections.weak_bounded_vec.WeakBoundedVecT1">
             <summary>
-            >> 77 - Composite[bounded_collections.weak_bounded_vec.WeakBoundedVecT1]
+            >> 80 - Composite[bounded_collections.weak_bounded_vec.WeakBoundedVecT1]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.bounded_collections.weak_bounded_vec.WeakBoundedVecT1.Value">
@@ -298,7 +393,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.bounded_collections.weak_bounded_vec.WeakBoundedVecT2">
             <summary>
-            >> 92 - Composite[bounded_collections.weak_bounded_vec.WeakBoundedVecT2]
+            >> 95 - Composite[bounded_collections.weak_bounded_vec.WeakBoundedVecT2]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.bounded_collections.weak_bounded_vec.WeakBoundedVecT2.Value">
@@ -317,7 +412,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.finality_grandpa.EquivocationT1">
             <summary>
-            >> 82 - Composite[finality_grandpa.EquivocationT1]
+            >> 85 - Composite[finality_grandpa.EquivocationT1]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.finality_grandpa.EquivocationT1.RoundNumber">
@@ -351,7 +446,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.finality_grandpa.EquivocationT2">
             <summary>
-            >> 87 - Composite[finality_grandpa.EquivocationT2]
+            >> 90 - Composite[finality_grandpa.EquivocationT2]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.finality_grandpa.EquivocationT2.RoundNumber">
@@ -385,7 +480,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.finality_grandpa.Precommit">
             <summary>
-            >> 88 - Composite[finality_grandpa.Precommit]
+            >> 91 - Composite[finality_grandpa.Precommit]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.finality_grandpa.Precommit.TargetHash">
@@ -409,7 +504,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.finality_grandpa.Prevote">
             <summary>
-            >> 83 - Composite[finality_grandpa.Prevote]
+            >> 86 - Composite[finality_grandpa.Prevote]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.finality_grandpa.Prevote.TargetHash">
@@ -433,7 +528,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_metadata_hash_extension.CheckMetadataHash">
             <summary>
-            >> 151 - Composite[frame_metadata_hash_extension.CheckMetadataHash]
+            >> 171 - Composite[frame_metadata_hash_extension.CheckMetadataHash]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.frame_metadata_hash_extension.CheckMetadataHash.Mode">
@@ -467,7 +562,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_metadata_hash_extension.EnumMode">
             <summary>
-            >> 152 - Variant[frame_metadata_hash_extension.Mode]
+            >> 172 - Variant[frame_metadata_hash_extension.Mode]
             </summary>
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_support.dispatch.DispatchInfo">
@@ -575,7 +670,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_support.dispatch.PerDispatchClassT2">
             <summary>
-            >> 57 - Composite[frame_support.dispatch.PerDispatchClassT2]
+            >> 60 - Composite[frame_support.dispatch.PerDispatchClassT2]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.frame_support.dispatch.PerDispatchClassT2.Normal">
@@ -604,7 +699,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_support.dispatch.PerDispatchClassT3">
             <summary>
-            >> 61 - Composite[frame_support.dispatch.PerDispatchClassT3]
+            >> 64 - Composite[frame_support.dispatch.PerDispatchClassT3]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.frame_support.dispatch.PerDispatchClassT3.Normal">
@@ -653,7 +748,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_support.traits.tokens.misc.IdAmountT1">
             <summary>
-            >> 100 - Composite[frame_support.traits.tokens.misc.IdAmountT1]
+            >> 103 - Composite[frame_support.traits.tokens.misc.IdAmountT1]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.frame_support.traits.tokens.misc.IdAmountT1.Id">
@@ -677,7 +772,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_support.traits.tokens.misc.IdAmountT2">
             <summary>
-            >> 104 - Composite[frame_support.traits.tokens.misc.IdAmountT2]
+            >> 107 - Composite[frame_support.traits.tokens.misc.IdAmountT2]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.frame_support.traits.tokens.misc.IdAmountT2.Id">
@@ -740,7 +835,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.CodeUpgradeAuthorization">
             <summary>
-            >> 51 - Composite[frame_system.CodeUpgradeAuthorization]
+            >> 54 - Composite[frame_system.CodeUpgradeAuthorization]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.frame_system.CodeUpgradeAuthorization.CodeHash">
@@ -784,7 +879,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.EnumPhase">
             <summary>
-            >> 44 - Variant[frame_system.Phase]
+            >> 47 - Variant[frame_system.Phase]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.frame_system.EnumPhase.#ctor">
@@ -823,7 +918,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_genesis.CheckGenesis">
             <summary>
-            >> 145 - Composite[frame_system.extensions.check_genesis.CheckGenesis]
+            >> 165 - Composite[frame_system.extensions.check_genesis.CheckGenesis]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_genesis.CheckGenesis.TypeName">
@@ -837,7 +932,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_mortality.CheckMortality">
             <summary>
-            >> 146 - Composite[frame_system.extensions.check_mortality.CheckMortality]
+            >> 166 - Composite[frame_system.extensions.check_mortality.CheckMortality]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_mortality.CheckMortality.Value">
@@ -856,7 +951,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_nonce.CheckNonce">
             <summary>
-            >> 148 - Composite[frame_system.extensions.check_nonce.CheckNonce]
+            >> 168 - Composite[frame_system.extensions.check_nonce.CheckNonce]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_nonce.CheckNonce.Value">
@@ -875,7 +970,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_non_zero_sender.CheckNonZeroSender">
             <summary>
-            >> 142 - Composite[frame_system.extensions.check_non_zero_sender.CheckNonZeroSender]
+            >> 162 - Composite[frame_system.extensions.check_non_zero_sender.CheckNonZeroSender]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_non_zero_sender.CheckNonZeroSender.TypeName">
@@ -889,7 +984,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_spec_version.CheckSpecVersion">
             <summary>
-            >> 143 - Composite[frame_system.extensions.check_spec_version.CheckSpecVersion]
+            >> 163 - Composite[frame_system.extensions.check_spec_version.CheckSpecVersion]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_spec_version.CheckSpecVersion.TypeName">
@@ -903,7 +998,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_tx_version.CheckTxVersion">
             <summary>
-            >> 144 - Composite[frame_system.extensions.check_tx_version.CheckTxVersion]
+            >> 164 - Composite[frame_system.extensions.check_tx_version.CheckTxVersion]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_tx_version.CheckTxVersion.TypeName">
@@ -917,7 +1012,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_weight.CheckWeight">
             <summary>
-            >> 149 - Composite[frame_system.extensions.check_weight.CheckWeight]
+            >> 169 - Composite[frame_system.extensions.check_weight.CheckWeight]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.frame_system.extensions.check_weight.CheckWeight.TypeName">
@@ -931,7 +1026,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.LastRuntimeUpgradeInfo">
             <summary>
-            >> 48 - Composite[frame_system.LastRuntimeUpgradeInfo]
+            >> 51 - Composite[frame_system.LastRuntimeUpgradeInfo]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.frame_system.LastRuntimeUpgradeInfo.SpecVersion">
@@ -955,7 +1050,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.limits.BlockLength">
             <summary>
-            >> 60 - Composite[frame_system.limits.BlockLength]
+            >> 63 - Composite[frame_system.limits.BlockLength]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.frame_system.limits.BlockLength.Max">
@@ -974,7 +1069,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.limits.BlockWeights">
             <summary>
-            >> 56 - Composite[frame_system.limits.BlockWeights]
+            >> 59 - Composite[frame_system.limits.BlockWeights]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.frame_system.limits.BlockWeights.BaseBlock">
@@ -1003,7 +1098,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.limits.WeightsPerClass">
             <summary>
-            >> 58 - Composite[frame_system.limits.WeightsPerClass]
+            >> 61 - Composite[frame_system.limits.WeightsPerClass]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.frame_system.limits.WeightsPerClass.BaseExtrinsic">
@@ -1135,7 +1230,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.pallet.EnumCall">
             <summary>
-            >> 52 - Variant[frame_system.pallet.Call]
+            >> 55 - Variant[frame_system.pallet.Call]
             Contains a variant per dispatchable extrinsic that this pallet has.
             </summary>
         </member>
@@ -1210,7 +1305,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.frame_system.pallet.EnumError">
             <summary>
-            >> 69 - Variant[frame_system.pallet.Error]
+            >> 72 - Variant[frame_system.pallet.Error]
             Error for the System pallet
             </summary>
         </member>
@@ -1382,7 +1477,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_balances.pallet.EnumCall">
             <summary>
-            >> 107 - Variant[pallet_balances.pallet.Call]
+            >> 110 - Variant[pallet_balances.pallet.Call]
             Contains a variant per dispatchable extrinsic that this pallet has.
             </summary>
         </member>
@@ -1466,7 +1561,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_balances.pallet.EnumError">
             <summary>
-            >> 114 - Variant[pallet_balances.pallet.Error]
+            >> 117 - Variant[pallet_balances.pallet.Error]
             The `Error` enum of this pallet.
             </summary>
         </member>
@@ -1657,7 +1752,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_balances.types.BalanceLock">
             <summary>
-            >> 93 - Composite[pallet_balances.types.BalanceLock]
+            >> 96 - Composite[pallet_balances.types.BalanceLock]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.pallet_balances.types.BalanceLock.Id">
@@ -1701,7 +1796,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_balances.types.EnumAdjustmentDirection">
             <summary>
-            >> 113 - Variant[pallet_balances.types.AdjustmentDirection]
+            >> 116 - Variant[pallet_balances.types.AdjustmentDirection]
             </summary>
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_balances.types.Reasons">
@@ -1726,7 +1821,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_balances.types.EnumReasons">
             <summary>
-            >> 94 - Variant[pallet_balances.types.Reasons]
+            >> 97 - Variant[pallet_balances.types.Reasons]
             </summary>
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_balances.types.ExtraFlags">
@@ -1750,7 +1845,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_balances.types.ReserveData">
             <summary>
-            >> 97 - Composite[pallet_balances.types.ReserveData]
+            >> 100 - Composite[pallet_balances.types.ReserveData]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.pallet_balances.types.ReserveData.Id">
@@ -1795,7 +1890,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra.pallet.EnumCall">
             <summary>
-            >> 120 - Variant[pallet_eterra.pallet.Call]
+            >> 123 - Variant[pallet_eterra.pallet.Call]
             Contains a variant per dispatchable extrinsic that this pallet has.
             </summary>
         </member>
@@ -1862,7 +1957,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra.pallet.EnumError">
             <summary>
-            >> 137 - Variant[pallet_eterra.pallet.Error]
+            >> 142 - Variant[pallet_eterra.pallet.Error]
             The `Error` enum of this pallet.
             </summary>
         </member>
@@ -1910,7 +2005,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra.types.card.Card">
             <summary>
-            >> 122 - Composite[pallet_eterra.types.card.Card]
+            >> 125 - Composite[pallet_eterra.types.card.Card]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.pallet_eterra.types.card.Card.Top">
@@ -1964,7 +2059,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra.types.card.EnumColor">
             <summary>
-            >> 124 - Variant[pallet_eterra.types.card.Color]
+            >> 127 - Variant[pallet_eterra.types.card.Color]
             </summary>
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra.types.game.GameState">
@@ -1989,7 +2084,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra.types.game.EnumGameState">
             <summary>
-            >> 129 - Variant[pallet_eterra.types.game.GameState]
+            >> 134 - Variant[pallet_eterra.types.game.GameState]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra.types.game.EnumGameState.#ctor">
@@ -1999,7 +2094,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra.types.game.Game">
             <summary>
-            >> 127 - Composite[pallet_eterra.types.game.Game]
+            >> 132 - Composite[pallet_eterra.types.game.Game]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.pallet_eterra.types.game.Game.State">
@@ -2058,7 +2153,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra.types.game.Move">
             <summary>
-            >> 121 - Composite[pallet_eterra.types.game.Move]
+            >> 124 - Composite[pallet_eterra.types.game.Move]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.pallet_eterra.types.game.Move.PlaceIndexX">
@@ -2083,6 +2178,324 @@
             <inheritdoc/>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra.types.game.Move.Decode(System.Byte[],System.Int32@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Call">
+            <summary>
+            >> Call
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Call.roll">
+            <summary>
+            >> roll
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Call.set_reel_weights">
+            <summary>
+            >> set_reel_weights
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.EnumCall">
+            <summary>
+            >> 129 - Variant[pallet_eterra_daily_slots.pallet.Call]
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.EnumCall.#ctor">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Error">
+            <summary>
+            >> Error
+            The `Error` enum of this pallet.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Error.RollNotAvailableYet">
+            <summary>
+            >> RollNotAvailableYet
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Error.ExceedRollsPerRound">
+            <summary>
+            >> ExceedRollsPerRound
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Error.InvalidConfiguration">
+            <summary>
+            >> InvalidConfiguration
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Error.NoTicketsAvailable">
+            <summary>
+            >> NoTicketsAvailable
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.EnumError">
+            <summary>
+            >> 157 - Variant[pallet_eterra_daily_slots.pallet.Error]
+            The `Error` enum of this pallet.
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Event">
+            <summary>
+            >> Event
+            The `Event` enum of this pallet
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Event.SlotRolled">
+            <summary>
+            >> SlotRolled
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Event.WeeklyWinner">
+            <summary>
+            >> WeeklyWinner
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.EnumEvent">
+            <summary>
+            >> 45 - Variant[pallet_eterra_daily_slots.pallet.Event]
+            The `Event` enum of this pallet
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.EnumEvent.#ctor">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.RollResult">
+            <summary>
+            >> 153 - Composite[pallet_eterra_daily_slots.pallet.RollResult]
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.RollResult.Timestamp">
+            <summary>
+            >> timestamp
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.RollResult.Result">
+            <summary>
+            >> result
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.RollResult.TypeName">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.RollResult.Encode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.RollResult.Decode(System.Byte[],System.Int32@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.CardInfo">
+            <summary>
+            >> 143 - Composite[pallet_eterra_tcg.pallet.CardInfo]
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.CardInfo.Owner">
+            <summary>
+            >> owner
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.CardInfo.Finalized">
+            <summary>
+            >> finalized
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.CardInfo.SlotValues">
+            <summary>
+            >> slot_values
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.CardInfo.TypeName">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.CardInfo.Encode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.CardInfo.Decode(System.Byte[],System.Int32@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Call">
+            <summary>
+            >> Call
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Call.mint_pack" -->
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Call.generate_slot">
+            <summary>
+            >> generate_slot
+            Generate new slot values for the user���s current (active) card, up to `MaxAttempts`.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Call.accept_slot">
+            <summary>
+            >> accept_slot
+            Accept (finalize) the user���s current card���s slot values immediately.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Call.transfer_card">
+            <summary>
+            >> transfer_card
+            **New**: Transfer a single card from `origin` to `to`.
+            If that card is also part of a pack, it still references it, but ownership
+            changes to `to`.
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.EnumCall">
+            <summary>
+            >> 128 - Variant[pallet_eterra_tcg.pallet.Call]
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.EnumCall.#ctor">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Error">
+            <summary>
+            >> Error
+            The `Error` enum of this pallet.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Error.MaxAttemptsExceeded">
+            <summary>
+            >> MaxAttemptsExceeded
+            Card attempts exceeded `MaxAttempts`.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Error.NoActiveCard">
+            <summary>
+            >> NoActiveCard
+            No active card found for the user in the current pack context.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Error.PackAlreadyCompleted">
+            <summary>
+            >> PackAlreadyCompleted
+            Pack is already completed, no further changes allowed.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Error.NoPackFound">
+            <summary>
+            >> NoPackFound
+            The user has no pack to operate on.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Error.MaxPacksReached">
+            <summary>
+            >> MaxPacksReached
+            The user���s pack limit is reached.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Error.NoSuchCard">
+            <summary>
+            >> NoSuchCard
+            Card does not exist in storage.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Error.NotCardOwner">
+            <summary>
+            >> NotCardOwner
+            You do not own the card you���re trying to act upon.
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.EnumError">
+            <summary>
+            >> 149 - Variant[pallet_eterra_tcg.pallet.Error]
+            The `Error` enum of this pallet.
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Event">
+            <summary>
+            >> Event
+            The `Event` enum of this pallet
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Event.PackMinted">
+            <summary>
+            >> PackMinted
+            A new pack was minted for `player` with ID `pack_id`, containing multiple new cards.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Event.SlotGenerated">
+            <summary>
+            >> SlotGenerated
+            A card���s slot was generated.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Event.SlotAccepted">
+            <summary>
+            >> SlotAccepted
+            A card���s slot was accepted (finalized).
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Event.SlotFinalized">
+            <summary>
+            >> SlotFinalized
+            A card was finalized (forced finalize).
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Event.PackCompleted">
+            <summary>
+            >> PackCompleted
+            A pack was completed (all cards finalized).
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Event.CardTransferred">
+            <summary>
+            >> CardTransferred
+            A card was transferred from `from` to `to`.
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.EnumEvent">
+            <summary>
+            >> 44 - Variant[pallet_eterra_tcg.pallet.Event]
+            The `Event` enum of this pallet
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.EnumEvent.#ctor">
+            <summary>
+            Initializes a new instance of the class.
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Pack">
+            <summary>
+            >> 146 - Composite[pallet_eterra_tcg.pallet.Pack]
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Pack.Id">
+            <summary>
+            >> id
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Pack.CardIds">
+            <summary>
+            >> card_ids
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Pack.ActiveCardIndex">
+            <summary>
+            >> active_card_index
+            </summary>
+        </member>
+        <member name="P:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Pack.Completed">
+            <summary>
+            >> completed
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Pack.TypeName">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Pack.Encode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Model.pallet_eterra_tcg.pallet.Pack.Decode(System.Byte[],System.Int32@)">
             <inheritdoc/>
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_grandpa.StoredState">
@@ -2112,7 +2525,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_grandpa.EnumStoredState">
             <summary>
-            >> 75 - Variant[pallet_grandpa.StoredState]
+            >> 78 - Variant[pallet_grandpa.StoredState]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.pallet_grandpa.EnumStoredState.#ctor">
@@ -2168,7 +2581,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_grandpa.pallet.EnumCall">
             <summary>
-            >> 79 - Variant[pallet_grandpa.pallet.Call]
+            >> 82 - Variant[pallet_grandpa.pallet.Call]
             Contains a variant per dispatchable extrinsic that this pallet has.
             </summary>
         </member>
@@ -2229,7 +2642,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_grandpa.pallet.EnumError">
             <summary>
-            >> 91 - Variant[pallet_grandpa.pallet.Error]
+            >> 94 - Variant[pallet_grandpa.pallet.Error]
             The `Error` enum of this pallet.
             </summary>
         </member>
@@ -2270,7 +2683,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_grandpa.StoredPendingChange">
             <summary>
-            >> 76 - Composite[pallet_grandpa.StoredPendingChange]
+            >> 79 - Composite[pallet_grandpa.StoredPendingChange]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.pallet_grandpa.StoredPendingChange.ScheduledAt">
@@ -2350,7 +2763,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_sudo.pallet.EnumCall">
             <summary>
-            >> 117 - Variant[pallet_sudo.pallet.Call]
+            >> 120 - Variant[pallet_sudo.pallet.Call]
             Contains a variant per dispatchable extrinsic that this pallet has.
             </summary>
         </member>
@@ -2373,7 +2786,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_sudo.pallet.EnumError">
             <summary>
-            >> 125 - Variant[pallet_sudo.pallet.Error]
+            >> 130 - Variant[pallet_sudo.pallet.Error]
             Error for the Sudo pallet.
             </summary>
         </member>
@@ -2456,7 +2869,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_template.pallet.EnumCall">
             <summary>
-            >> 119 - Variant[pallet_template.pallet.Call]
+            >> 122 - Variant[pallet_template.pallet.Call]
             The pallet's dispatchable functions ([`Call`]s).
             
             Dispatchable functions allows users to interact with the pallet and invoke state changes.
@@ -2503,7 +2916,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_template.pallet.EnumError">
             <summary>
-            >> 126 - Variant[pallet_template.pallet.Error]
+            >> 131 - Variant[pallet_template.pallet.Error]
             Errors that can be returned by this pallet.
             
             Errors tell users that something went wrong so it's important that their naming is
@@ -2587,7 +3000,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_timestamp.pallet.EnumCall">
             <summary>
-            >> 70 - Variant[pallet_timestamp.pallet.Call]
+            >> 73 - Variant[pallet_timestamp.pallet.Call]
             Contains a variant per dispatchable extrinsic that this pallet has.
             </summary>
         </member>
@@ -2598,7 +3011,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_transaction_payment.ChargeTransactionPayment">
             <summary>
-            >> 150 - Composite[pallet_transaction_payment.ChargeTransactionPayment]
+            >> 170 - Composite[pallet_transaction_payment.ChargeTransactionPayment]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.pallet_transaction_payment.ChargeTransactionPayment.Value">
@@ -2632,7 +3045,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_transaction_payment.EnumReleases">
             <summary>
-            >> 116 - Variant[pallet_transaction_payment.Releases]
+            >> 119 - Variant[pallet_transaction_payment.Releases]
             </summary>
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.pallet_transaction_payment.pallet.Event">
@@ -2718,9 +3131,19 @@
             >> Eterra
             </summary>
         </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.RuntimeCall.EterraTCG">
+            <summary>
+            >> EterraTCG
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.RuntimeCall.EterraDailySlots">
+            <summary>
+            >> EterraDailySlots
+            </summary>
+        </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.EnumRuntimeCall">
             <summary>
-            >> 118 - Variant[solochain_template_runtime.RuntimeCall]
+            >> 121 - Variant[solochain_template_runtime.RuntimeCall]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.EnumRuntimeCall.#ctor">
@@ -2768,6 +3191,16 @@
             >> Eterra
             </summary>
         </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.RuntimeEvent.EterraTCG">
+            <summary>
+            >> EterraTCG
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.RuntimeEvent.EterraDailySlots">
+            <summary>
+            >> EterraDailySlots
+            </summary>
+        </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.EnumRuntimeEvent">
             <summary>
             >> 21 - Variant[solochain_template_runtime.RuntimeEvent]
@@ -2785,7 +3218,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.EnumRuntimeFreezeReason">
             <summary>
-            >> 105 - Variant[solochain_template_runtime.RuntimeFreezeReason]
+            >> 108 - Variant[solochain_template_runtime.RuntimeFreezeReason]
             </summary>
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.RuntimeHoldReason">
@@ -2795,12 +3228,12 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.EnumRuntimeHoldReason">
             <summary>
-            >> 101 - Variant[solochain_template_runtime.RuntimeHoldReason]
+            >> 104 - Variant[solochain_template_runtime.RuntimeHoldReason]
             </summary>
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.EterraNumPlayers">
             <summary>
-            >> 128 - Composite[solochain_template_runtime.EterraNumPlayers]
+            >> 133 - Composite[solochain_template_runtime.EterraNumPlayers]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.EterraNumPlayers.TypeName">
@@ -2814,7 +3247,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.Runtime">
             <summary>
-            >> 154 - Composite[solochain_template_runtime.Runtime]
+            >> 174 - Composite[solochain_template_runtime.Runtime]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.solochain_template_runtime.Runtime.TypeName">
@@ -2853,7 +3286,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.sp_arithmetic.fixed_point.FixedU128">
             <summary>
-            >> 115 - Composite[sp_arithmetic.fixed_point.FixedU128]
+            >> 118 - Composite[sp_arithmetic.fixed_point.FixedU128]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.sp_arithmetic.fixed_point.FixedU128.Value">
@@ -2872,7 +3305,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.sp_consensus_aura.sr25519.app_sr25519.Public">
             <summary>
-            >> 72 - Composite[sp_consensus_aura.sr25519.app_sr25519.Public]
+            >> 75 - Composite[sp_consensus_aura.sr25519.app_sr25519.Public]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.sp_consensus_aura.sr25519.app_sr25519.Public.Value">
@@ -2910,7 +3343,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.sp_consensus_grandpa.app.Signature">
             <summary>
-            >> 84 - Composite[sp_consensus_grandpa.app.Signature]
+            >> 87 - Composite[sp_consensus_grandpa.app.Signature]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.sp_consensus_grandpa.app.Signature.Value">
@@ -2944,7 +3377,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.sp_consensus_grandpa.EnumEquivocation">
             <summary>
-            >> 81 - Variant[sp_consensus_grandpa.Equivocation]
+            >> 84 - Variant[sp_consensus_grandpa.Equivocation]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.sp_consensus_grandpa.EnumEquivocation.#ctor">
@@ -2954,7 +3387,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.sp_consensus_grandpa.EquivocationProof">
             <summary>
-            >> 80 - Composite[sp_consensus_grandpa.EquivocationProof]
+            >> 83 - Composite[sp_consensus_grandpa.EquivocationProof]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.sp_consensus_grandpa.EquivocationProof.SetId">
@@ -2978,7 +3411,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.sp_consensus_slots.Slot">
             <summary>
-            >> 74 - Composite[sp_consensus_slots.Slot]
+            >> 77 - Composite[sp_consensus_slots.Slot]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.sp_consensus_slots.Slot.Value">
@@ -3121,7 +3554,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.sp_runtime.EnumMultiSignature">
             <summary>
-            >> 139 - Variant[sp_runtime.MultiSignature]
+            >> 159 - Variant[sp_runtime.MultiSignature]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.sp_runtime.EnumMultiSignature.#ctor">
@@ -4555,7 +4988,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.sp_runtime.generic.era.EnumEra">
             <summary>
-            >> 147 - Variant[sp_runtime.generic.era.Era]
+            >> 167 - Variant[sp_runtime.generic.era.Era]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.sp_runtime.generic.era.EnumEra.#ctor">
@@ -4565,7 +4998,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.sp_runtime.generic.unchecked_extrinsic.UncheckedExtrinsic">
             <summary>
-            >> 138 - Composite[sp_runtime.generic.unchecked_extrinsic.UncheckedExtrinsic]
+            >> 158 - Composite[sp_runtime.generic.unchecked_extrinsic.UncheckedExtrinsic]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.sp_runtime.generic.unchecked_extrinsic.UncheckedExtrinsic.Value">
@@ -4638,7 +5071,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress">
             <summary>
-            >> 108 - Variant[sp_runtime.multiaddress.MultiAddress]
+            >> 111 - Variant[sp_runtime.multiaddress.MultiAddress]
             </summary>
         </member>
         <member name="M:Eterra.NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress.#ctor">
@@ -4648,7 +5081,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.sp_version.RuntimeVersion">
             <summary>
-            >> 63 - Composite[sp_version.RuntimeVersion]
+            >> 66 - Composite[sp_version.RuntimeVersion]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.sp_version.RuntimeVersion.SpecName">
@@ -4702,7 +5135,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Model.sp_weights.RuntimeDbWeight">
             <summary>
-            >> 62 - Composite[sp_weights.RuntimeDbWeight]
+            >> 65 - Composite[sp_weights.RuntimeDbWeight]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Model.sp_weights.RuntimeDbWeight.Read">
@@ -5247,6 +5680,429 @@
         <member name="F:Eterra.NetApiExt.Generated.Storage.EterraErrors.CreatorMustBeInGame">
             <summary>
             >> CreatorMustBeInGame
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage">
+            <summary>
+            >> EterraDailySlotsStorage
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.#ctor(Eterra.NetApiExt.Generated.SubstrateClientExt)">
+            <summary>
+            >> EterraDailySlotsStorage Constructor
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.RollsTodayParams(Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32)">
+            <summary>
+            >> RollsTodayParams
+             (YYYY-day, count_so_far)
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.RollsTodayDefault">
+            <summary>
+            >> RollsTodayDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.RollsToday(Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> RollsToday
+             (YYYY-day, count_so_far)
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.LastRollTimeParams(Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32)">
+            <summary>
+            >> LastRollTimeParams
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.LastRollTimeDefault">
+            <summary>
+            >> LastRollTimeDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.LastRollTime(Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> LastRollTime
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.RollsThisBlockParams(Substrate.NetApi.Model.Types.Base.BaseTuple{Substrate.NetApi.Model.Types.Primitive.U32,Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32})">
+            <summary>
+            >> RollsThisBlockParams
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.RollsThisBlockDefault">
+            <summary>
+            >> RollsThisBlockDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.RollsThisBlock(Substrate.NetApi.Model.Types.Base.BaseTuple{Substrate.NetApi.Model.Types.Primitive.U32,Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> RollsThisBlock
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.TicketsPerUserParams(Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32)">
+            <summary>
+            >> TicketsPerUserParams
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.TicketsPerUserDefault">
+            <summary>
+            >> TicketsPerUserDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.TicketsPerUser(Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> TicketsPerUser
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.TotalTicketsParams">
+            <summary>
+            >> TotalTicketsParams
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.TotalTicketsDefault">
+            <summary>
+            >> TotalTicketsDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.TotalTickets(System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> TotalTickets
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.LastDrawingTimeParams">
+            <summary>
+            >> LastDrawingTimeParams
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.LastDrawingTimeDefault">
+            <summary>
+            >> LastDrawingTimeDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.LastDrawingTime(System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> LastDrawingTime
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.RollHistoryParams(Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32)">
+            <summary>
+            >> RollHistoryParams
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.RollHistoryDefault">
+            <summary>
+            >> RollHistoryDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.RollHistory(Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> RollHistory
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.ReelWeightsParams(Substrate.NetApi.Model.Types.Primitive.U32)">
+            <summary>
+            >> ReelWeightsParams
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.ReelWeightsDefault">
+            <summary>
+            >> ReelWeightsDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsStorage.ReelWeights(Substrate.NetApi.Model.Types.Primitive.U32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> ReelWeights
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsCalls">
+            <summary>
+            >> EterraDailySlotsCalls
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsCalls.Roll">
+            <summary>
+            >> roll
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsCalls.SetReelWeights(Substrate.NetApi.Model.Types.Primitive.U32,Substrate.NetApi.Model.Types.Base.BaseVec{Substrate.NetApi.Model.Types.Base.BaseTuple{Substrate.NetApi.Model.Types.Primitive.U32,Substrate.NetApi.Model.Types.Primitive.U32}})">
+            <summary>
+            >> set_reel_weights
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsConstants">
+            <summary>
+            >> EterraDailySlotsConstants
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsConstants.MaxSlotLength">
+            <summary>
+            >> MaxSlotLength
+             How many reels (slots)
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsConstants.MaxOptionsPerSlot">
+            <summary>
+            >> MaxOptionsPerSlot
+             How many symbols per reel
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsConstants.MaxRollsPerRound">
+            <summary>
+            >> MaxRollsPerRound
+             Max rolls allowed per block
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsConstants.MaxRollHistoryLength">
+            <summary>
+            >> MaxRollHistoryLength
+             Maximum number of roll results stored per account
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsConstants.MaxWeightEntries">
+            <summary>
+            >> MaxWeightEntries
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsErrors">
+            <summary>
+            >> EterraDailySlotsErrors
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsErrors.RollNotAvailableYet">
+            <summary>
+            >> RollNotAvailableYet
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsErrors.ExceedRollsPerRound">
+            <summary>
+            >> ExceedRollsPerRound
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsErrors.InvalidConfiguration">
+            <summary>
+            >> InvalidConfiguration
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Storage.EterraDailySlotsErrors.NoTicketsAvailable">
+            <summary>
+            >> NoTicketsAvailable
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage">
+            <summary>
+            >> EterraTCGStorage
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.#ctor(Eterra.NetApiExt.Generated.SubstrateClientExt)">
+            <summary>
+            >> EterraTCGStorage Constructor
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.NextCardIdParams">
+            <summary>
+            >> NextCardIdParams
+             A global counter to assign unique IDs to cards.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.NextCardIdDefault">
+            <summary>
+            >> NextCardIdDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.NextCardId(System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> NextCardId
+             A global counter to assign unique IDs to cards.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.CardsParams(Substrate.NetApi.Model.Types.Primitive.U32)">
+            <summary>
+            >> CardsParams
+             All cards in the system, by global `card_id` => `CardInfo`.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.CardsDefault">
+            <summary>
+            >> CardsDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.Cards(Substrate.NetApi.Model.Types.Primitive.U32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> Cards
+             All cards in the system, by global `card_id` => `CardInfo`.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.PlayerPacksParams(Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32)">
+            <summary>
+            >> PlayerPacksParams
+             A map from account => list of packs
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.PlayerPacksDefault">
+            <summary>
+            >> PlayerPacksDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.PlayerPacks(Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> PlayerPacks
+             A map from account => list of packs
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.ActiveCardParams(Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32)">
+            <summary>
+            >> ActiveCardParams
+             Tracks the currently ���active��� card index (within a pack) for each account
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.ActiveCardDefault">
+            <summary>
+            >> ActiveCardDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.ActiveCard(Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> ActiveCard
+             Tracks the currently ���active��� card index (within a pack) for each account
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.CardAttemptsParams(Substrate.NetApi.Model.Types.Primitive.U32)">
+            <summary>
+            >> CardAttemptsParams
+             Stores the attempt count for each card: `card_id => current attempts`.
+             We omit the account ID here because the card can be traded to another owner.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.CardAttemptsDefault">
+            <summary>
+            >> CardAttemptsDefault
+            Default value as hex string
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGStorage.CardAttempts(Substrate.NetApi.Model.Types.Primitive.U32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            >> CardAttempts
+             Stores the attempt count for each card: `card_id => current attempts`.
+             We omit the account ID here because the card can be traded to another owner.
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Storage.EterraTCGCalls">
+            <summary>
+            >> EterraTCGCalls
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGCalls.MintPack">
+            <summary>
+            >> mint_pack
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGCalls.GenerateSlot">
+            <summary>
+            >> generate_slot
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGCalls.AcceptSlot">
+            <summary>
+            >> accept_slot
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGCalls.TransferCard(Substrate.NetApi.Model.Types.Primitive.U32,Eterra.NetApiExt.Generated.Model.sp_core.crypto.AccountId32)">
+            <summary>
+            >> transfer_card
+            Contains a variant per dispatchable extrinsic that this pallet has.
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Storage.EterraTCGConstants">
+            <summary>
+            >> EterraTCGConstants
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGConstants.RandomnessSeed">
+            <summary>
+            >> RandomnessSeed
+             A numeric seed for our randomness.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGConstants.MaxAttempts">
+            <summary>
+            >> MaxAttempts
+             The maximum times a card can generate slots before it is forced to finalize.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGConstants.CardsPerPack">
+            <summary>
+            >> CardsPerPack
+             How many cards are in each newly minted pack.
+            </summary>
+        </member>
+        <member name="M:Eterra.NetApiExt.Generated.Storage.EterraTCGConstants.MaxPacks">
+            <summary>
+            >> MaxPacks
+             The maximum number of packs a single account can hold.
+            </summary>
+        </member>
+        <member name="T:Eterra.NetApiExt.Generated.Storage.EterraTCGErrors">
+            <summary>
+            >> EterraTCGErrors
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Storage.EterraTCGErrors.MaxAttemptsExceeded">
+            <summary>
+            >> MaxAttemptsExceeded
+            Card attempts exceeded `MaxAttempts`.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Storage.EterraTCGErrors.NoActiveCard">
+            <summary>
+            >> NoActiveCard
+            No active card found for the user in the current pack context.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Storage.EterraTCGErrors.PackAlreadyCompleted">
+            <summary>
+            >> PackAlreadyCompleted
+            Pack is already completed, no further changes allowed.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Storage.EterraTCGErrors.NoPackFound">
+            <summary>
+            >> NoPackFound
+            The user has no pack to operate on.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Storage.EterraTCGErrors.MaxPacksReached">
+            <summary>
+            >> MaxPacksReached
+            The user���s pack limit is reached.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Storage.EterraTCGErrors.NoSuchCard">
+            <summary>
+            >> NoSuchCard
+            Card does not exist in storage.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.Storage.EterraTCGErrors.NotCardOwner">
+            <summary>
+            >> NotCardOwner
+            You do not own the card you���re trying to act upon.
             </summary>
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Storage.GrandpaStorage">
@@ -5941,7 +6797,7 @@
             Contains a variant per dispatchable extrinsic that this pallet has.
             </summary>
         </member>
-        <member name="M:Eterra.NetApiExt.Generated.Storage.SystemCalls.SetStorage(Substrate.NetApi.Model.Types.Base.BaseVec{SBaseTupleubstrate.NetApi.Model.Types.Base.{Substrate.NetApi.Model.Types.Base.BaseVec{Substrate.NetApi.Model.Types.Primitive.U8},Substrate.NetApi.Model.Types.Base.BaseVec{Substrate.NetApi.Model.Types.Primitive.U8}}})">
+        <member name="M:Eterra.NetApiExt.Generated.Storage.SystemCalls.SetStorage(Substrate.NetApi.Model.Types.Base.BaseVec{Substrate.NetApi.Model.Types.Base.BaseTuple{Substrate.NetApi.Model.Types.Base.BaseVec{Substrate.NetApi.Model.Types.Primitive.U8},Substrate.NetApi.Model.Types.Base.BaseVec{Substrate.NetApi.Model.Types.Primitive.U8}}})">
             <summary>
             >> set_storage
             Contains a variant per dispatchable extrinsic that this pallet has.
@@ -6377,9 +7233,19 @@
             EterraStorage storage calls.
             </summary>
         </member>
+        <member name="F:Eterra.NetApiExt.Generated.SubstrateClientExt.EterraTCGStorage">
+            <summary>
+            EterraTCGStorage storage calls.
+            </summary>
+        </member>
+        <member name="F:Eterra.NetApiExt.Generated.SubstrateClientExt.EterraDailySlotsStorage">
+            <summary>
+            EterraDailySlotsStorage storage calls.
+            </summary>
+        </member>
         <member name="T:Eterra.NetApiExt.Generated.Types.Base.Arr20U8">
             <summary>
-            >> 110 - Array
+            >> 113 - Array
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Types.Base.Arr20U8.Value">
@@ -6429,7 +7295,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Types.Base.Arr4Arr4BaseOpt">
             <summary>
-            >> 132 - Array
+            >> 137 - Array
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Types.Base.Arr4Arr4BaseOpt.Value">
@@ -6454,7 +7320,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Types.Base.Arr4BaseOpt">
             <summary>
-            >> 133 - Array
+            >> 138 - Array
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "P:Eterra.NetApiExt.Generated.Types.Base.Arr4BaseOpt.Value" -->
@@ -6500,7 +7366,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Types.Base.Arr64U8">
             <summary>
-            >> 85 - Array
+            >> 88 - Array
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Types.Base.Arr64U8.Value">
@@ -6525,7 +7391,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Types.Base.Arr65U8">
             <summary>
-            >> 140 - Array
+            >> 160 - Array
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Types.Base.Arr65U8.Value">
@@ -6550,7 +7416,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Types.Base.Arr8U8">
             <summary>
-            >> 67 - Array
+            >> 70 - Array
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Types.Base.Arr8U8.Value">
@@ -6575,7 +7441,7 @@
         </member>
         <member name="T:Eterra.NetApiExt.Generated.Types.Base.Cow">
             <summary>
-            >> 64 - Composite[Cow]
+            >> 67 - Composite[Cow]
             </summary>
         </member>
         <member name="P:Eterra.NetApiExt.Generated.Types.Base.Cow.Value">

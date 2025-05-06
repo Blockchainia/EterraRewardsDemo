@@ -6,23 +6,16 @@ namespace Assets.Scripts.ScreenStates
 {
   internal class PlayInitSubState : GameBaseState
   {
-    private Label _statusLabel;
-    private Button _statusActionButton;
-    private VisualElement _playerArrow;
-    private VisualElement _opponentArrow;
-    private VisualElement _timeSpent;
-    private VisualElement _timeLeft;
-    private Label _playerScore;
-    private Label _opponentScore;
-    private Button _btnPlayerReady;
-    private Label _lblOpponentReady;
-    private Coroutine _timerCoroutine;
+    private VisualElement _slot1;
+    private VisualElement _slot2;
+    private VisualElement _slot3;
+    private VisualElement _slotArmHolder;
+    private Label _lblTitle;
+    private VisualElement _instantWinDisplay;
+    private VisualElement _rewardHistory;
 
     public PlayInitSubState(GameController flowController, GameBaseState parent)
-        : base(flowController, parent)
-    {
-
-    }
+        : base(flowController, parent) { }
 
     public override void EnterState()
     {
@@ -30,110 +23,38 @@ namespace Assets.Scripts.ScreenStates
 
       var root = FlowController.VelContainer.Q<VisualElement>("Screen");
 
-      _statusLabel = root.Q<Label>("lblStatusLabel");
-      _statusActionButton = root.Q<Button>("btnStatusActionButton");
-      _playerArrow = root.Q<VisualElement>("PlayerArrow");
-      _opponentArrow = root.Q<VisualElement>("OpponentArrow");
-      _timeSpent = root.Q<VisualElement>("TimeSpent");
-      _timeLeft = root.Q<VisualElement>("TimeLeft");
-      _playerScore = root.Q<Label>("lblPlayerScore");
-      _opponentScore = root.Q<Label>("lblOpponentScore");
-      _btnPlayerReady = root.Q<Button>("btnPlayerReady");
-      _lblOpponentReady = root.Q<Label>("lblOpponentReady");
+      _lblTitle = root.Q<Label>("LblTitle");
+      _slot1 = root.Q<VisualElement>("Slot1");
+      _slot2 = root.Q<VisualElement>("Slot2");
+      _slot3 = root.Q<VisualElement>("Slot3");
+      _slotArmHolder = root.Q<VisualElement>("SlotArmHolder");
+      _instantWinDisplay = root.Q<VisualElement>("InstantWinDisplay");
+      _rewardHistory = root.Q<VisualElement>("RewardHistory");
 
-      // Disable the OpponentArrow
-      if (_opponentArrow != null)
-      {
-        _opponentArrow.style.display = DisplayStyle.None;
-        Debug.Log("OpponentArrow has been disabled.");
-      }
-      else
-      {
-        Debug.LogError("OpponentArrow element not found!");
-      }
+      if (_lblTitle != null) Debug.Log("[UI] LblTitle found: " + _lblTitle.text);
+      if (_slot1 == null || _slot2 == null || _slot3 == null) Debug.LogError("[UI] One or more Slot elements not found");
+      if (_slotArmHolder == null) Debug.LogError("[UI] SlotArmHolder not found");
+      if (_instantWinDisplay == null) Debug.LogError("[UI] InstantWinDisplay not found");
+      if (_rewardHistory == null) Debug.LogError("[UI] RewardHistory not found");
 
-      // Enable the PlayerArrow
-      if (_playerArrow != null)
-      {
-        _playerArrow.style.display = DisplayStyle.Flex;
-        Debug.Log("PlayerArrow has been enabled.");
-      }
-      else
-      {
-        Debug.LogError("PlayerArrow element not found!");
-      }
-
-      InitializeGameState();
+      InitializeDisplay();
     }
 
-    private void InitializeGameState()
+    private void InitializeDisplay()
     {
-      _playerScore.text = "5";
-      _opponentScore.text = "5";
-      _timeSpent.style.height = new StyleLength(Length.Percent(0));
-      _timeLeft.style.height = new StyleLength(Length.Percent(100));
+      _instantWinDisplay?.Clear();
+      _instantWinDisplay?.Add(new Label("Instant Win Display Initialized"));
 
-      _statusActionButton.text = "Play";
-      _statusActionButton.SetEnabled(false);
+      _rewardHistory?.Clear();
+      _rewardHistory?.Add(new Label("History Panel Initialized"));
 
-      _btnPlayerReady.SetEnabled(true);
-      _lblOpponentReady.style.display = DisplayStyle.Flex;
-      _btnPlayerReady.clicked += OnPlayerReadyClicked;
-
-      // Start the timer coroutine
-      if (_timerCoroutine != null)
-      {
-        FlowController.StopCoroutine(_timerCoroutine);
-      }
-      _timerCoroutine = FlowController.StartCoroutine(StartTimer());
-    }
-
-    private IEnumerator StartTimer()
-    {
-      float elapsedPercentage = 0f;
-      while (elapsedPercentage < 100f)
-      {
-        elapsedPercentage += 3f;
-        UpdateTime(elapsedPercentage);
-        yield return new WaitForSeconds(1f);
-      }
-
-      Debug.Log("Timer finished in PlayInitSubState.");
-    }
-
-    public void UpdateTime(float percentageElapsed)
-    {
-      Debug.Log($"[Timer] Updating time: {percentageElapsed}% elapsed.");
-
-      _timeSpent.style.height = new StyleLength(Length.Percent(percentageElapsed));
-      _timeLeft.style.height = new StyleLength(Length.Percent(100 - percentageElapsed));
-    }
-
-    private void OnPlayerReadyClicked()
-    {
-      Debug.Log("Player ready button clicked. Transitioning to PlayPlayerTurnSubState.");
-      _btnPlayerReady.style.display = DisplayStyle.None;
-      _lblOpponentReady.style.display = DisplayStyle.None;
-      _btnPlayerReady.SetEnabled(false);
-      _lblOpponentReady.SetEnabled(false);
-
-      FlowController.ChangeScreenSubState(GameScreen.PlayScreen, GameSubScreen.PlaySpinning);
+      if (_lblTitle != null)
+        _lblTitle.text = "🎰 Welcome to the Slot Machine";
     }
 
     public override void ExitState()
     {
       Debug.Log($"[{this.GetType().Name}][SUB] ExitState");
-
-      // Stop the timer coroutine if it is running
-      if (_timerCoroutine != null)
-      {
-        FlowController.StopCoroutine(_timerCoroutine);
-        _timerCoroutine = null;
-        Debug.Log("Timer coroutine stopped in ExitState.");
-      }
-
-      // Unsubscribe from button events
-      _btnPlayerReady.clicked -= OnPlayerReadyClicked;
     }
   }
 }

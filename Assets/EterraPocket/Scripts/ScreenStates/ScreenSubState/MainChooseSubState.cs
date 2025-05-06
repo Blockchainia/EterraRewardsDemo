@@ -31,10 +31,10 @@ namespace Assets.Scripts.ScreenStates
       floatBody.Add(scrollViewElement);
 
       var scrollView = scrollViewElement.Q<ScrollView>("ScvElement");
-
       TemplateContainer elementInstance = ElementInstance("UI/Frames/PlayMenu");
 
       _btnPlay = elementInstance.Q<Button>("BtnPlay");
+      _btnPlay.text = "Connecting...";
       _btnPlay.SetEnabled(false);
       _btnPlay.RegisterCallback<ClickEvent>(OnBtnPlayClicked);
 
@@ -45,8 +45,26 @@ namespace Assets.Scripts.ScreenStates
       var btnExit = elementInstance.Q<Button>("BtnExit");
       btnExit.RegisterCallback<ClickEvent>(OnBtnExitClicked);
 
-      // add element
       scrollView.Add(elementInstance);
+
+      // 🔁 Check connection or wait for it
+      if (SubstrateConnectionWatcher.Instance?.IsConnected == true)
+      {
+        EnablePlayButton();
+      }
+      else
+      {
+        SubstrateConnectionWatcher.Instance.OnConnected += EnablePlayButton;
+      }
+    }
+
+    private void EnablePlayButton()
+    {
+      _btnPlay.text = "Play";
+      _btnPlay.SetEnabled(true);
+
+      // Optional: unsubscribe once enabled
+      SubstrateConnectionWatcher.Instance.OnConnected -= EnablePlayButton;
     }
 
     public override void ExitState()

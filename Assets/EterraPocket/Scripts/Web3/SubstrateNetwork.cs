@@ -44,6 +44,11 @@ namespace Assets.Scripts
       Account = account;
     }
 
+    /// <summary>
+    ///   Expose the underlying SubstrateClientExt so we can hand it to generated storage APIs.
+    /// </summary>
+    public Eterra.NetApiExt.Generated.SubstrateClientExt ApiClient => this.SubstrateClient;
+
     #region storage
 
     /// <summary>
@@ -405,6 +410,64 @@ namespace Assets.Scripts
 
     #region extrinsics
 
+
+    /// <summary>
+    /// Create game
+    /// </summary>
+    /// <param name="players"></param>
+    /// <param name="concurrentTasks"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
+    public async Task<string> CreateGameAsync(AccountId32[] players, int concurrentTasks, CancellationToken token)
+    {
+      var extrinsicType = "EterraCalls.CreateGame";
+
+      if (!IsConnected || Account == null)
+      {
+        return null;
+      }
+
+      var extrinsic = EterraCalls.CreateGame(new BaseVec<AccountId32>(players.ToArray()));
+
+      return await GenericExtrinsicAsync(Account, extrinsicType, extrinsic, concurrentTasks, token);
+    }
+
+    /// <summary>
+    /// Create game
+    /// </summary>
+    /// <param name="players"></param>
+    /// <param name="concurrentTasks"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
+    public async Task<string> SpinSlotAsync(AccountId32 player, int concurrentTasks, CancellationToken token)
+    {
+      var extrinsicType = "EterraDailySlotsCalls.Roll";
+
+      if (!IsConnected || Account == null)
+      {
+        return null;
+      }
+
+      var extrinsic = EterraDailySlotsCalls.Roll();
+
+      return await GenericExtrinsicAsync(Account, extrinsicType, extrinsic, concurrentTasks, token);
+    }
+
+    public async Task<string> SetReelWeightsAsync(Account account, BaseVec<BaseTuple<U32, U32>> weights, int concurrentTasks, CancellationToken token)
+    {
+      var extrinsicType = "EterraDailySlotsCalls.SetReelWeights";
+
+      if (!IsConnected || account == null)
+      {
+        return null!;
+      }
+
+      var reelIndex = new U32(); reelIndex.Create(0); // Assuming index 0
+      var extrinsic = EterraDailySlotsCalls.SetReelWeights(reelIndex, weights);
+
+      return await GenericExtrinsicAsync(account, extrinsicType, extrinsic, concurrentTasks, token);
+    }
+
     /// <summary>
     /// Remark
     /// </summary>
@@ -467,8 +530,6 @@ namespace Assets.Scripts
       return await GenericExtrinsicAsync(account, extrinsicType, extrinsic, concurrentTasks, token);
     }
 
-
-    
     /// <summary>
     /// Submit a sudo extrinsic.
     /// </summary>
@@ -490,6 +551,23 @@ namespace Assets.Scripts
       return await GenericExtrinsicAsync(sudoAccount, extrinsicType, extrinsic, concurrentTasks, token);
     }
 
+    public async Task<Eterra.NetApiExt.Generated.Model.pallet_eterra.types.game.Game> GetGameByIdAsync(
+    string gameIdHex,
+    string blockHash,
+    CancellationToken token)
+    {
+      // In our storage key construction, we assume that the key is built by concatenating a fixed prefix
+      // (the result of Twox128("Eterra") concatenated with Twox128("GameStorage"))
+      // with the 64‑hex‑character game ID (i.e. the H256 representing the GameID).
+      string prefix = "0x18B52016F052F43043D279E1CF846B35";
+      string storageKey = prefix + gameIdHex;
+
+      // Use the underlying SubstrateClient to fetch storage.
+      return await SubstrateClient.GetStorageAsync<Eterra.NetApiExt.Generated.Model.pallet_eterra.types.game.Game>(
+          storageKey, blockHash, token);
+    }
+
     #endregion extrinsics
+
   }
 }
