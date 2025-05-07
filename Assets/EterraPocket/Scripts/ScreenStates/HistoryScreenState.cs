@@ -25,9 +25,6 @@ namespace Assets.Scripts.ScreenStates
     {
       Debug.Log($"[{this.GetType().Name}] EnterState");
 
-      // Filler to avoid camera in the UI
-      // var topFiller = FlowController.VelContainer.Q<VisualElement>("VelTopFiller");
-
       if (_historyScreenUI != null)
       {
         var instance = _historyScreenUI.Instantiate();
@@ -37,7 +34,7 @@ namespace Assets.Scripts.ScreenStates
         // Add container
         FlowController.VelContainer.Add(instance);
 
-        // Load initial sub state
+        // Proceed to substate initialization
         FlowController.ChangeScreenSubState(GameScreen.HistoryScreen, GameSubScreen.HistoryInit);
       }
       else
