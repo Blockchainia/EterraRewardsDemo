@@ -306,6 +306,16 @@ namespace Assets.Scripts.ScreenStates
             _btnSpin.SetEnabled(rollsUsed < maxRolls);
         });
 
+        if (rollsUsed >= maxRolls)
+        {
+          Debug.Log("[Spin] Max daily rolls reached. Transitioning to PlayFinishedSubState.");
+          UnityMainThreadDispatcher.Instance().Enqueue(() =>
+          {
+            FlowController.ChangeScreenSubState(GameScreen.PlayScreen, GameSubScreen.PlayFinished);
+          });
+          return;
+        }
+
         _pendingRollResult = false;
         await FetchAndDisplayLatestRoll();
       }
