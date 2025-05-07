@@ -125,7 +125,6 @@ namespace Assets.Scripts
       {
         { GameSubScreen.PlayInit, new PlayInitSubState(this, playScreen) },
         { GameSubScreen.PlaySpinning, new PlaySpinningSubState(this, playScreen) },
-        { GameSubScreen.PlayEnabled, new PlayEnabledSubState(this, playScreen) },
         { GameSubScreen.PlayFinished, new PlayFinishedSubState(this, playScreen) },
       });
 
