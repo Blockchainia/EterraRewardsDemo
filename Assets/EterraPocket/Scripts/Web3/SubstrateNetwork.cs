@@ -569,5 +569,50 @@ namespace Assets.Scripts
 
     #endregion extrinsics
 
+    // Block monitoring implementation
+    private uint _lastMonitoredBlock = 0;
+    public event Action<uint> NewBlockDetected;
+
+    public async Task StartMonitoringBlocksAsync(CancellationToken token)
+    {
+      while (!token.IsCancellationRequested)
+      {
+        try
+        {
+          var block = await SubstrateClient.SystemStorage.Number(null, token);
+          var currentBlock = block?.Value ?? 0;
+
+          if (currentBlock != _lastMonitoredBlock)
+          {
+            _lastMonitoredBlock = currentBlock;
+            NewBlockDetected?.Invoke(currentBlock);
+          }
+        }
+        catch (Exception ex)
+        {
+          Log.Warning("Block watcher encountered an error: {0}", ex.Message);
+        }
+
+        await Task.Delay(6000, token); // Poll every ~6s
+      }
+    }
+
+    /// <summary>
+    /// Subscribe to new block events with a provided callback.
+    /// </summary>
+    /// <param name="callback">Action to call when a new block is detected</param>
+    public event Action<uint> OnNewBlock
+    {
+      add => NewBlockDetected += value;
+      remove => NewBlockDetected -= value;
+    }
+    /// <summary>
+    /// Initializes block monitoring. Call this at application startup to begin block monitoring.
+    /// </summary>
+    /// <param name="token">Cancellation token to stop monitoring</param>
+    public void InitializeMonitoring(CancellationToken token)
+    {
+      _ = StartMonitoringBlocksAsync(token);
+    }
   }
 }

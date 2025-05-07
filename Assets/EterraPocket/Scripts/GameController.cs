@@ -1,7 +1,11 @@
+using System;
 using System.Linq;
 using System.Reflection;
+using System.Collections;
+using System.Collections.Generic;
 using Serilog;
 using Substrate.NetApi;
+using Substrate.NetApi.Model.Extrinsics;
 using Substrate.NetApi.Model.Types.Base;
 using Substrate.NetApi.Model.Types.Primitive;
 using Substrate.NetApi.Model.Types;
@@ -16,10 +20,13 @@ using Assets.Scripts.ScreenStates;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading;
+using System.Threading.Tasks;
 using Eterra.Engine; // Add this for SubstrateNetwork
+using Eterra.Engine.Logic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Assets.Scripts;
+using Eterra.Config;
 
 namespace Assets.Scripts
 {
@@ -50,6 +57,8 @@ namespace Assets.Scripts
 
     private SubstrateNetwork _substrate;
     private CancellationTokenSource _cts;
+    private Func<CancellationToken, Task<U32>> SystemStorageNumber { get; set; }
+
 
     public SubstrateNetwork Substrate => _substrate;
     public CancellationToken CancellationToken => _cts?.Token ?? CancellationToken.None;
@@ -64,7 +73,12 @@ namespace Assets.Scripts
       {
         if (task.Exception != null)
           Debug.LogError("Failed to connect to Substrate: " + task.Exception.InnerException?.Message);
+
+        _substrate.InitializeMonitoring(_cts.Token);
       });
+      
+
+      EterraConfig.Initialize((Eterra.NetApiExt.Generated.SubstrateClientExt)_substrate.ApiClient);
     }
 
     /// <summary>

@@ -1,3 +1,4 @@
+using System;
 using Eterra.Engine.Models;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -14,8 +15,11 @@ using Assets.Scripts;
 using Eterra.Integration.Helper;
 using Eterra.NetApiExt.Generated.Model.bounded_collections.bounded_vec;
 using Eterra.NetApiExt.Generated.Storage;
+using Eterra.NetApiExt.Generated;
 using Substrate.NetApi.Model.Types.Base;
 using Substrate.NetApi.Model.Types.Primitive;
+using Eterra.Config;
+using Eterra.Engine.Logic;
 
 namespace Assets.Scripts.ScreenStates
 {
@@ -31,6 +35,9 @@ namespace Assets.Scripts.ScreenStates
     private Button _btnSpin;
     private SubstrateNetwork _substrate;
     private CancellationToken _cancellationToken;
+    private bool _triggeredInitialSpin = false;
+    private bool _pendingRollResult = false;
+    private bool _firstBlockHandled = false;
 
     public PlaySpinningSubState(GameController flowController, GameBaseState parent)
         : base(flowController, parent)
@@ -48,108 +55,34 @@ namespace Assets.Scripts.ScreenStates
       _cancellationToken = (FlowController as GameController)?.CancellationToken ?? CancellationToken.None;
 
       _lblTitle = root.Q<Label>("LblTitle");
-      if (_lblTitle != null)
-      {
-        Debug.Log("LblTitle element found.");
-      }
-      else
-      {
-        Debug.LogError("LblTitle element not found!");
-      }
-
       _slot1 = root.Q<VisualElement>("Slot1");
-      if (_slot1 != null)
-      {
-        Debug.Log("Slot1 element found.");
-      }
-      else
-      {
-        Debug.LogError("Slot1 element not found!");
-      }
-
       _slot2 = root.Q<VisualElement>("Slot2");
-      if (_slot2 != null)
-      {
-        Debug.Log("Slot2 element found.");
-      }
-      else
-      {
-        Debug.LogError("Slot2 element not found!");
-      }
-
       _slot3 = root.Q<VisualElement>("Slot3");
-      if (_slot3 != null)
-      {
-        Debug.Log("Slot3 element found.");
-      }
-      else
-      {
-        Debug.LogError("Slot3 element not found!");
-      }
-
       _slotArmHolder = root.Q<VisualElement>("SlotArmHolder");
-      if (_slotArmHolder != null)
-      {
-        Debug.Log("SlotArmHolder element found.");
-      }
-      else
-      {
-        Debug.LogError("SlotArmHolder element not found!");
-      }
-
       _instantWinDisplay = root.Q<VisualElement>("InstantWinDisplay");
-      if (_instantWinDisplay != null)
-      {
-        Debug.Log("InstantWinDisplay element found.");
-      }
-      else
-      {
-        Debug.LogError("InstantWinDisplay element not found!");
-      }
-
       _rewardHistory = root.Q<VisualElement>("RewardHistory");
-      if (_rewardHistory != null)
-      {
-        Debug.Log("RewardHistory element found.");
-      }
-      else
-      {
-        Debug.LogError("RewardHistory element not found!");
-      }
-
       _btnSpin = root.Q<Button>("BtnSpin");
-      if (_btnSpin != null)
-      {
-        Debug.Log("BtnSpin element found.");
-      }
-      else
-      {
-        Debug.LogError("BtnSpin element not found!");
-      }
+
+      Debug.Log(_lblTitle != null ? "LblTitle element found." : "LblTitle element not found!");
+      Debug.Log(_slot1 != null ? "Slot1 element found." : "Slot1 element not found!");
+      Debug.Log(_slot2 != null ? "Slot2 element found." : "Slot2 element not found!");
+      Debug.Log(_slot3 != null ? "Slot3 element found." : "Slot3 element not found!");
+      Debug.Log(_slotArmHolder != null ? "SlotArmHolder element found." : "SlotArmHolder element not found!");
+      Debug.Log(_instantWinDisplay != null ? "InstantWinDisplay element found." : "InstantWinDisplay element not found!");
+      Debug.Log(_rewardHistory != null ? "RewardHistory element found." : "RewardHistory element not found!");
+      Debug.Log(_btnSpin != null ? "BtnSpin element found." : "BtnSpin element not found!");
 
       InitializeGameState();
-      TriggerSlotSpinAsync();
+
+      _substrate.OnNewBlock += HandleNewBlock;
+      Debug.Log("[Spin] Subscribed to OnNewBlock via event subscription.");
     }
 
     private void InitializeGameState()
     {
-      if (_instantWinDisplay != null)
-      {
-        _instantWinDisplay.Clear();
-        // Initialize _instantWinDisplay as needed
-      }
-
-      if (_rewardHistory != null)
-      {
-        _rewardHistory.Clear();
-        // Initialize _rewardHistory as needed
-      }
-
-      if (_lblTitle != null)
-      {
-        _lblTitle.text = "Spinning Slots...";
-      }
-
+      _instantWinDisplay?.Clear();
+      _rewardHistory?.Clear();
+      if (_lblTitle != null) _lblTitle.text = "Spinning Slots...";
       if (_btnSpin != null)
       {
         _btnSpin.SetEnabled(false);
@@ -214,6 +147,8 @@ namespace Assets.Scripts.ScreenStates
                   _slot2.Q<Label>("LblSlot2").text = reels.Length > 1 ? reels[1].ToString() : "?";
                   _slot3.Q<Label>("LblSlot3").text = reels.Length > 2 ? reels[2].ToString() : "?";
                 });
+
+                _pendingRollResult = true;
               }
             }
           }
@@ -233,6 +168,11 @@ namespace Assets.Scripts.ScreenStates
       {
         _btnSpin.clicked -= OnSpinClicked;
       }
+      if (_substrate != null)
+      {
+        _substrate.OnNewBlock -= HandleNewBlock;
+        Debug.Log("[Spin] Unsubscribed from OnNewBlock via event unsubscription.");
+      }
     }
 
     private async void TriggerSlotSpinAsync()
@@ -248,9 +188,21 @@ namespace Assets.Scripts.ScreenStates
 
       try
       {
-        var spinSubId = await _substrate.SpinSlotAsync(player, 1, token);
-        Debug.Log($"[Spin] Triggered from EnterState. Subscription ID: {spinSubId}");
-        await FetchAndDisplayLatestRoll();
+        // 🔢 Load GameSharp info (daily rolls, etc.)
+        await GameSharp.UpdateRollHistory(_substrate, token);
+        int rollsUsed = GameSharp.CurrentDailyRolls != null ? GameSharp.CurrentDailyRolls.Length : 0;
+        int maxRolls = (int)(EterraConfig.MaxRollsPerRound?.Value ?? 3);
+
+        Debug.Log($"[Spin] Rolls used today: {rollsUsed} / {maxRolls}");
+
+        if (_btnSpin != null)
+        {
+          _btnSpin.SetEnabled(rollsUsed < maxRolls);
+        }
+
+        // Show most recent result regardless
+        // Wait for next block before fetching and displaying roll results
+        Debug.Log("[Spin] Waiting for next block before fetching roll results.");
       }
       catch (System.Exception ex)
       {
@@ -293,12 +245,51 @@ namespace Assets.Scripts.ScreenStates
         }
         else
         {
-          Debug.LogWarning("[Spin] No roll history found.");
+          Debug.LogWarning("[Spin] No roll history found. Displaying default placeholders.");
+          UnityMainThreadDispatcher.Instance().Enqueue(() =>
+          {
+            _slot1.Q<Label>("LblSlot1").text = "?";
+            _slot2.Q<Label>("LblSlot2").text = "?";
+            _slot3.Q<Label>("LblSlot3").text = "?";
+          });
         }
       }
       catch (System.Exception ex)
       {
         Debug.LogError($"[Spin] Failed to fetch/display roll history: {ex}");
+      }
+    }
+
+    private async void HandleNewBlock(uint blockNumber)
+    {
+      try
+      {
+        Debug.Log($"[Spin] HandleNewBlock triggered. Block: {blockNumber}");
+        await Task.Delay(250); // Wait for roll to be stored
+        Debug.Log("[Spin] New block detected.");
+
+        await GameSharp.UpdateRollHistory(_substrate, _cancellationToken);
+        int rollsUsed = GameSharp.CurrentDailyRolls?.Length ?? 0;
+        int maxRolls = (int)(EterraConfig.MaxRollsPerRound?.Value ?? 3);
+        Debug.Log($"[Spin] GameSharp updated. Rolls used: {rollsUsed}, Max: {maxRolls}");
+
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+          if (_btnSpin != null)
+          {
+            _btnSpin.SetEnabled(rollsUsed < maxRolls);
+          }
+        });
+
+        if (_pendingRollResult)
+        {
+          _pendingRollResult = false;
+          await FetchAndDisplayLatestRoll();
+        }
+      }
+      catch (System.Exception ex)
+      {
+        Debug.LogError($"[Spin] Error during OnNewBlock: {ex}");
       }
     }
   }
