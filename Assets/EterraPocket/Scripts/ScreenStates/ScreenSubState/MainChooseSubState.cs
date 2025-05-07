@@ -90,6 +90,14 @@ namespace Assets.Scripts.ScreenStates
     private void OnBtnExitClicked(ClickEvent evt)
     {
       Debug.Log($"[{this.GetType().Name}][SUB] OnBtnExitClicked");
+
+#if UNITY_EDITOR
+      // Stop play mode in the Unity Editor
+      UnityEditor.EditorApplication.isPlaying = false;
+#else
+  // Quit application in builds or simulator
+  Application.Quit();
+#endif
     }
   }
 }
