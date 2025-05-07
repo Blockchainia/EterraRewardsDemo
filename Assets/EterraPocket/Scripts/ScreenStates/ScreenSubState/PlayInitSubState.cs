@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections;
+using Eterra.Engine.Logic;
+using System.Threading;
+
 
 namespace Assets.Scripts.ScreenStates
 {
@@ -18,9 +21,11 @@ namespace Assets.Scripts.ScreenStates
     public PlayInitSubState(GameController flowController, GameBaseState parent)
         : base(flowController, parent) { }
 
-    public override void EnterState()
+    public override async void EnterState()
     {
       Debug.Log($"[{this.GetType().Name}][SUB] EnterState");
+
+      await GameSharp.UpdateRollHistory((FlowController as GameController)?.Substrate, CancellationToken.None);
 
       var root = FlowController.VelContainer.Q<VisualElement>("Screen");
 
@@ -45,8 +50,26 @@ namespace Assets.Scripts.ScreenStates
       }
       else
       {
-        _btnSpin.clicked += OnSpinClicked;
-        _btnSpin.SetEnabled(true);
+        int rollsUsed = GameSharp.CurrentDailyRolls?.Length ?? 0;
+        int maxRolls = (int)(Eterra.Config.EterraConfig.MaxRollsPerRound?.Value ?? 3);
+
+        if (rollsUsed >= maxRolls)
+        {
+          _btnSpin.text = "Exit";
+          _btnSpin.SetEnabled(true);
+          _btnSpin.clicked += () =>
+          {
+            Debug.Log("[UI] Max rolls reached. Returning to MainChooseSubState.");
+            FlowController.ChangeScreenState(GameScreen.MainScreen);
+            FlowController.ChangeScreenSubState(GameScreen.MainScreen, GameSubScreen.MainChoose);
+          };
+        }
+        else
+        {
+          _btnSpin.text = "Spin!";
+          _btnSpin.SetEnabled(true);
+          _btnSpin.clicked += OnSpinClicked;
+        }
       }
 
       InitializeDisplay();
