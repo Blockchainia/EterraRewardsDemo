@@ -15,7 +15,6 @@ namespace Assets.Scripts.ScreenStates
     private VisualElement _slotArmHolder;
     private Label _lblTitle;
     private VisualElement _instantWinDisplay;
-    private VisualElement _rewardHistory;
     private Button _btnSpin;
 
     public PlayInitSubState(GameController flowController, GameBaseState parent)
@@ -35,13 +34,11 @@ namespace Assets.Scripts.ScreenStates
       _slot3 = root.Q<VisualElement>("Slot3");
       _slotArmHolder = root.Q<VisualElement>("SlotArmHolder");
       _instantWinDisplay = root.Q<VisualElement>("InstantWinDisplay");
-      _rewardHistory = root.Q<VisualElement>("RewardHistory");
 
       if (_lblTitle != null) Debug.Log("[UI] LblTitle found: " + _lblTitle.text);
       if (_slot1 == null || _slot2 == null || _slot3 == null) Debug.LogError("[UI] One or more Slot elements not found");
       if (_slotArmHolder == null) Debug.LogError("[UI] SlotArmHolder not found");
       if (_instantWinDisplay == null) Debug.LogError("[UI] InstantWinDisplay not found");
-      if (_rewardHistory == null) Debug.LogError("[UI] RewardHistory not found");
 
       _btnSpin = _slotArmHolder.Q<Button>("BtnSpin");
       if (_btnSpin == null)
@@ -80,11 +77,8 @@ namespace Assets.Scripts.ScreenStates
       _instantWinDisplay?.Clear();
       _instantWinDisplay?.Add(new Label("Instant Win Display Initialized"));
 
-      _rewardHistory?.Clear();
-      _rewardHistory?.Add(new Label("History Panel Initialized"));
-
       if (_lblTitle != null)
-        _lblTitle.text = "🎰 Welcome to the Slot Machine";
+        _lblTitle.text = "Eterra Rewards!";
     }
 
     public override void ExitState()

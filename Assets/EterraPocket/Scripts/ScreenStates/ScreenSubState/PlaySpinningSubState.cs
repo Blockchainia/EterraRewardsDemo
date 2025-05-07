@@ -31,7 +31,6 @@ namespace Assets.Scripts.ScreenStates
     private VisualElement _slotArmHolder;
     private Label _lblTitle;
     private VisualElement _instantWinDisplay;
-    private VisualElement _rewardHistory;
     private Button _btnSpin;
     private SubstrateNetwork _substrate;
     private CancellationToken _cancellationToken;
@@ -60,7 +59,6 @@ namespace Assets.Scripts.ScreenStates
       _slot3 = root.Q<VisualElement>("Slot3");
       _slotArmHolder = root.Q<VisualElement>("SlotArmHolder");
       _instantWinDisplay = root.Q<VisualElement>("InstantWinDisplay");
-      _rewardHistory = root.Q<VisualElement>("RewardHistory");
       _btnSpin = root.Q<Button>("BtnSpin");
 
       InitializeGameState();
@@ -79,7 +77,6 @@ namespace Assets.Scripts.ScreenStates
     private void InitializeGameState()
     {
       _instantWinDisplay?.Clear();
-      _rewardHistory?.Clear();
       if (_lblTitle != null) _lblTitle.text = "Spinning Slots...";
       if (_btnSpin != null)
       {
