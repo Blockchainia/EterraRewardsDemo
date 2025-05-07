@@ -63,15 +63,6 @@ namespace Assets.Scripts.ScreenStates
       _rewardHistory = root.Q<VisualElement>("RewardHistory");
       _btnSpin = root.Q<Button>("BtnSpin");
 
-      Debug.Log(_lblTitle != null ? "LblTitle element found." : "LblTitle element not found!");
-      Debug.Log(_slot1 != null ? "Slot1 element found." : "Slot1 element not found!");
-      Debug.Log(_slot2 != null ? "Slot2 element found." : "Slot2 element not found!");
-      Debug.Log(_slot3 != null ? "Slot3 element found." : "Slot3 element not found!");
-      Debug.Log(_slotArmHolder != null ? "SlotArmHolder element found." : "SlotArmHolder element not found!");
-      Debug.Log(_instantWinDisplay != null ? "InstantWinDisplay element found." : "InstantWinDisplay element not found!");
-      Debug.Log(_rewardHistory != null ? "RewardHistory element found." : "RewardHistory element not found!");
-      Debug.Log(_btnSpin != null ? "BtnSpin element found." : "BtnSpin element not found!");
-
       InitializeGameState();
 
       // Register click event using UI Toolkit callback system.
@@ -80,11 +71,9 @@ namespace Assets.Scripts.ScreenStates
         _btnSpin.RegisterCallback<ClickEvent>(evt => OnSpinClicked());
         _btnSpin.clicked += () => Debug.Log("[Spin] .clicked fallback event fired");
         _btnSpin.SetEnabled(true);  // Force enable to test
-        Debug.Log("[Spin] RegisterCallback attached to BtnSpin.");
       }
 
       _substrate.OnNewBlock += HandleNewBlock;
-      Debug.Log("[Spin] Subscribed to OnNewBlock via event subscription.");
     }
 
     private void InitializeGameState()
@@ -95,15 +84,12 @@ namespace Assets.Scripts.ScreenStates
       if (_btnSpin != null)
       {
         Debug.Log("Spin registered with OnSpinClicked");
-        // _btnSpin.clicked += OnSpinClicked;
-        //  _btnSpin.SetEnabled(false);
       }
     }
 
     private async void OnSpinClicked()
     {
       Debug.Log("[Spin] OnSpinClicked triggered.");
-      Debug.Log("Spin button clicked.");
 
       if (_pendingRollResult)
       {
@@ -118,20 +104,16 @@ namespace Assets.Scripts.ScreenStates
       }
 
       var player = Generic.ToAccountId32(_substrate.Account);
-      Debug.Log($"[Spin] Player account resolved: {player}");
       var token = _cancellationToken;
 
       try
       {
         _pendingRollResult = true;
-        Debug.Log("[Spin] _pendingRollResult set to true.");
         var spinSubId = await _substrate.SpinSlotAsync(player, 1, token);
-        Debug.Log($"SpinSlotAsync submitted. Subscription ID: {spinSubId}");
         Debug.Log($"[Spin] Submitted extrinsic. Subscription ID: {spinSubId}");
 
         _substrate.ExtrinsicManager.ExtrinsicUpdated += async (id, info) =>
         {
-          Debug.Log("[Spin] Entered ExtrinsicUpdated lambda.");
           Debug.Log($"[Spin] ExtrinsicUpdate triggered. ID: {id}, Status: {info.TransactionEvent}");
           if (id != spinSubId || !(info.IsInBlock || info.IsCompleted)) return;
 
