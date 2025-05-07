@@ -5,6 +5,9 @@
             <ui:VisualElement name="TitleHolder" style="height: 12%; justify-content: center; align-items: center; padding-top: 18px; padding-bottom: 12px;">
                 <ui:Label name="LblTitle" text="Eterra Reward History" style="-unity-font-style: bold; font-size: 36px; -unity-text-align: middle-center;" />
             </ui:VisualElement>
+            <ui:VisualElement name="ExitButtonHolder" style="height: 8%; justify-content: center; align-items: center; padding-top: 5px;">
+                <ui:Button name="BtnExit" text="Exit" style="width: 160px; height: 40px; font-size: 20px;" />
+            </ui:VisualElement>
             <ui:ScrollView name="HistoryScroll" style="flex-grow: 1; justify-content: center; align-items: center; flex-direction: column; padding: 20px;">
                 <ui:VisualElement name="RewardHistory" style="height: 2%; min-height: 0; padding: 2px;" />
             </ui:ScrollView>

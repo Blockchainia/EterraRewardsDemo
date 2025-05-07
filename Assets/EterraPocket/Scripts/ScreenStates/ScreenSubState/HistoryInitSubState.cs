@@ -86,6 +86,21 @@ namespace Assets.Scripts
           dayLabel.style.marginBottom = 10;
           rewardHistoryContainer.Add(dayLabel);
         }
+
+        var btnExit = root?.Q<Button>("BtnExit");
+        if (btnExit != null)
+        {
+          btnExit.clicked += () =>
+          {
+            Debug.Log("[HistoryInit] Exit button clicked. Returning to main screen.");
+            FlowController.ChangeScreenState(GameScreen.MainScreen);
+            FlowController.ChangeScreenSubState(GameScreen.MainScreen, GameSubScreen.MainChoose);
+          };
+        }
+        else
+        {
+          Debug.LogWarning("[HistoryInit] BtnExit not found in UI.");
+        }
       }
       catch (System.Exception ex)
       {
