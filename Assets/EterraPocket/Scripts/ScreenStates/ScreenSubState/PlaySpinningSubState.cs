@@ -74,6 +74,15 @@ namespace Assets.Scripts.ScreenStates
 
       InitializeGameState();
 
+      // Register click event using UI Toolkit callback system.
+      if (_btnSpin != null)
+      {
+        _btnSpin.RegisterCallback<ClickEvent>(evt => OnSpinClicked());
+        _btnSpin.clicked += () => Debug.Log("[Spin] .clicked fallback event fired");
+        _btnSpin.SetEnabled(true);  // Force enable to test
+        Debug.Log("[Spin] RegisterCallback attached to BtnSpin.");
+      }
+
       _substrate.OnNewBlock += HandleNewBlock;
       Debug.Log("[Spin] Subscribed to OnNewBlock via event subscription.");
     }
@@ -85,14 +94,22 @@ namespace Assets.Scripts.ScreenStates
       if (_lblTitle != null) _lblTitle.text = "Spinning Slots...";
       if (_btnSpin != null)
       {
-        _btnSpin.SetEnabled(false);
-        _btnSpin.clicked += OnSpinClicked;
+        Debug.Log("Spin registered with OnSpinClicked");
+        // _btnSpin.clicked += OnSpinClicked;
+        //  _btnSpin.SetEnabled(false);
       }
     }
 
     private async void OnSpinClicked()
     {
+      Debug.Log("[Spin] OnSpinClicked triggered.");
       Debug.Log("Spin button clicked.");
+
+      if (_pendingRollResult)
+      {
+        Debug.LogWarning("[Spin] A roll is already pending. Please wait.");
+        return;
+      }
 
       if (_substrate == null || !_substrate.IsConnected)
       {
@@ -101,16 +118,20 @@ namespace Assets.Scripts.ScreenStates
       }
 
       var player = Generic.ToAccountId32(_substrate.Account);
+      Debug.Log($"[Spin] Player account resolved: {player}");
       var token = _cancellationToken;
 
       try
       {
+        _pendingRollResult = true;
+        Debug.Log("[Spin] _pendingRollResult set to true.");
         var spinSubId = await _substrate.SpinSlotAsync(player, 1, token);
         Debug.Log($"SpinSlotAsync submitted. Subscription ID: {spinSubId}");
         Debug.Log($"[Spin] Submitted extrinsic. Subscription ID: {spinSubId}");
 
         _substrate.ExtrinsicManager.ExtrinsicUpdated += async (id, info) =>
         {
+          Debug.Log("[Spin] Entered ExtrinsicUpdated lambda.");
           Debug.Log($"[Spin] ExtrinsicUpdate triggered. ID: {id}, Status: {info.TransactionEvent}");
           if (id != spinSubId || !(info.IsInBlock || info.IsCompleted)) return;
 
@@ -118,6 +139,7 @@ namespace Assets.Scripts.ScreenStates
 
           if (info.EventRecords != null)
           {
+            Debug.Log("[Spin] Checking event records.");
             Debug.Log($"[Spin] Processing {info.EventRecords.Count} event records.");
             foreach (var rec in info.EventRecords)
             {
@@ -148,7 +170,9 @@ namespace Assets.Scripts.ScreenStates
                   _slot3.Q<Label>("LblSlot3").text = reels.Length > 2 ? reels[2].ToString() : "?";
                 });
 
-                _pendingRollResult = true;
+                _pendingRollResult = false;
+                Debug.Log("[Spin] _pendingRollResult reset to false after extrinsic processed.");
+                await FetchAndDisplayLatestRoll();
               }
             }
           }
@@ -265,10 +289,31 @@ namespace Assets.Scripts.ScreenStates
       try
       {
         Debug.Log($"[Spin] HandleNewBlock triggered. Block: {blockNumber}");
-        await Task.Delay(250); // Wait for roll to be stored
-        Debug.Log("[Spin] New block detected.");
 
-        await GameSharp.UpdateRollHistory(_substrate, _cancellationToken);
+        if (!_pendingRollResult)
+          return;
+
+        var initialCount = GameSharp.CurrentDailyRolls?.Length ?? 0;
+        var token = _cancellationToken;
+        int maxWaitMs = 5000; // total wait time (5 seconds)
+        int intervalMs = 250;
+        int waited = 0;
+
+        while (waited < maxWaitMs)
+        {
+          await GameSharp.UpdateRollHistory(_substrate, token);
+          var currentCount = GameSharp.CurrentDailyRolls?.Length ?? 0;
+
+          if (currentCount > initialCount)
+          {
+            Debug.Log($"[Spin] New roll detected. Count changed: {initialCount} -> {currentCount}");
+            break;
+          }
+
+          await Task.Delay(intervalMs, token);
+          waited += intervalMs;
+        }
+
         int rollsUsed = GameSharp.CurrentDailyRolls?.Length ?? 0;
         int maxRolls = (int)(EterraConfig.MaxRollsPerRound?.Value ?? 3);
         Debug.Log($"[Spin] GameSharp updated. Rolls used: {rollsUsed}, Max: {maxRolls}");
@@ -276,16 +321,11 @@ namespace Assets.Scripts.ScreenStates
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {
           if (_btnSpin != null)
-          {
             _btnSpin.SetEnabled(rollsUsed < maxRolls);
-          }
         });
 
-        if (_pendingRollResult)
-        {
-          _pendingRollResult = false;
-          await FetchAndDisplayLatestRoll();
-        }
+        _pendingRollResult = false;
+        await FetchAndDisplayLatestRoll();
       }
       catch (System.Exception ex)
       {

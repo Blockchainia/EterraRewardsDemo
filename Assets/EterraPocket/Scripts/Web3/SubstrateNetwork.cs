@@ -15,6 +15,7 @@ using System.Threading;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -603,8 +604,16 @@ namespace Assets.Scripts
     /// <param name="callback">Action to call when a new block is detected</param>
     public event Action<uint> OnNewBlock
     {
-      add => NewBlockDetected += value;
-      remove => NewBlockDetected -= value;
+      add
+      {
+        Debug.Log($"[OnNewBlock] Subscribed: {value.Method.Name}");
+        NewBlockDetected += value;
+      }
+      remove
+      {
+        Debug.Log($"[OnNewBlock] Unsubscribed: {value.Method.Name}");
+        NewBlockDetected -= value;
+      }
     }
     /// <summary>
     /// Initializes block monitoring. Call this at application startup to begin block monitoring.
