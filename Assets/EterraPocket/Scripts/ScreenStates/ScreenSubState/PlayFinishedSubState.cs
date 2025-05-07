@@ -30,13 +30,18 @@ namespace Assets.Scripts.ScreenStates
       var slotArmHolder = root.Q<VisualElement>("SlotArmHolder");
       var instantWinDisplay = root.Q<VisualElement>("InstantWinDisplay");
       var rewardHistory = root.Q<VisualElement>("RewardHistory");
-      var btnSpin = root.Q<Button>("BtnSpin");
+      _btnPlay = root.Q<Button>("BtnSpin");
 
       if (lblTitle != null)
         lblTitle.text = "You've reached today's limit!";
 
-      if (btnSpin != null)
-        btnSpin.SetEnabled(false);
+      if (_btnPlay != null)
+      {
+        _btnPlay.SetEnabled(false);
+        _btnPlay.text = "Exit";
+        _btnPlay.SetEnabled(true);
+        _btnPlay.clicked += OnExitClicked;
+      }
 
       if (instantWinDisplay != null)
       {
@@ -50,6 +55,15 @@ namespace Assets.Scripts.ScreenStates
     public override void ExitState()
     {
       Debug.Log($"[{this.GetType().Name}][SUB] ExitState");
+      if (_btnPlay != null)
+        _btnPlay.clicked -= OnExitClicked;
+    }
+
+    private void OnExitClicked()
+    {
+      Debug.Log($"[{this.GetType().Name}][SUB] Exit button clicked.");
+      FlowController.ChangeScreenState(GameScreen.MainScreen);
+      FlowController.ChangeScreenSubState(GameScreen.MainScreen, GameSubScreen.MainChoose);
     }
   }
 }

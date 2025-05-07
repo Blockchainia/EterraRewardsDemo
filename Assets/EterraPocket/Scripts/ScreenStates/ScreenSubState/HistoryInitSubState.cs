@@ -38,6 +38,21 @@ namespace Assets.Scripts
       var root = FlowController.VelContainer.Q<VisualElement>("Screen");
       var rewardHistoryContainer = root?.Q<VisualElement>("RewardHistory");
 
+      var btnExit = root?.Q<Button>("BtnExit");
+      if (btnExit != null)
+      {
+        btnExit.clicked += () =>
+        {
+          Debug.Log("[HistoryInit] Exit button clicked. Returning to main screen.");
+          FlowController.ChangeScreenState(GameScreen.MainScreen);
+          FlowController.ChangeScreenSubState(GameScreen.MainScreen, GameSubScreen.MainChoose);
+        };
+      }
+      else
+      {
+        Debug.LogWarning("[HistoryInit] BtnExit not found in UI.");
+      }
+
       if (rewardHistoryContainer == null)
       {
         Debug.LogError("[HistoryInit] RewardHistory container not found.");
@@ -66,6 +81,7 @@ namespace Assets.Scripts
         if (history?.Value == null)
         {
           rewardHistoryContainer.Add(new Label("No roll history found."));
+
           return;
         }
 
@@ -85,21 +101,6 @@ namespace Assets.Scripts
           dayLabel.style.marginTop = 10;
           dayLabel.style.marginBottom = 10;
           rewardHistoryContainer.Add(dayLabel);
-        }
-
-        var btnExit = root?.Q<Button>("BtnExit");
-        if (btnExit != null)
-        {
-          btnExit.clicked += () =>
-          {
-            Debug.Log("[HistoryInit] Exit button clicked. Returning to main screen.");
-            FlowController.ChangeScreenState(GameScreen.MainScreen);
-            FlowController.ChangeScreenSubState(GameScreen.MainScreen, GameSubScreen.MainChoose);
-          };
-        }
-        else
-        {
-          Debug.LogWarning("[HistoryInit] BtnExit not found in UI.");
         }
       }
       catch (System.Exception ex)
