@@ -71,6 +71,17 @@ namespace Assets.Scripts.ScreenStates
         return rollDate == System.DateTime.UtcNow.Date;
       }) ?? false;
 
+      // Check if max rolls reached and immediately redirect if so
+      int maxRolls = (int)(Eterra.Config.EterraConfig.MaxRollsPerRound?.Value ?? 3);
+      int rollsUsed = GameSharp.CurrentDailyRolls?.Length ?? 0;
+
+      if (rollsUsed >= maxRolls)
+      {
+        await FetchAndDisplayLatestRoll();
+        FlowController.ChangeScreenSubState(GameScreen.PlayScreen, GameSubScreen.PlayFinished);
+        return;
+      }
+
       if (hasRolledToday)
       {
         await FetchAndDisplayLatestRoll();
@@ -163,12 +174,12 @@ namespace Assets.Scripts.ScreenStates
 
       if (_substrate.Account == null)
       {
-          Debug.LogError("[Spin] Substrate account is null. Aborting spin.");
-          _pendingRollResult = false;
-          _currentPhase = SpinPhase.Init;
-          _btnSpin.text = "Spin";
-          _btnSpin.SetEnabled(true);
-          return;
+        Debug.LogError("[Spin] Substrate account is null. Aborting spin.");
+        _pendingRollResult = false;
+        _currentPhase = SpinPhase.Init;
+        _btnSpin.text = "Spin";
+        _btnSpin.SetEnabled(true);
+        return;
       }
 
       var player = Generic.ToAccountId32(_substrate.Account);
@@ -178,25 +189,25 @@ namespace Assets.Scripts.ScreenStates
       Debug.Log($"[Spin] Received spinSubId from SpinSlotAsync: {spinSubId}");
       if (string.IsNullOrWhiteSpace(spinSubId))
       {
-          Debug.LogError("[Spin] SpinSlotAsync returned null or empty sub ID. Aborting spin.");
-          _pendingRollResult = false;
-          _currentPhase = SpinPhase.Init;
-          _btnSpin.text = "Spin";
-          _btnSpin.SetEnabled(true);
-          return;
+        Debug.LogError("[Spin] SpinSlotAsync returned null or empty sub ID. Aborting spin.");
+        _pendingRollResult = false;
+        _currentPhase = SpinPhase.Init;
+        _btnSpin.text = "Spin";
+        _btnSpin.SetEnabled(true);
+        return;
       }
 
       if (_extrinsicUpdatedHandler != null)
       {
-          _substrate.ExtrinsicManager.ExtrinsicUpdated -= _extrinsicUpdatedHandler;
-          _extrinsicUpdatedHandler = null;
+        _substrate.ExtrinsicManager.ExtrinsicUpdated -= _extrinsicUpdatedHandler;
+        _extrinsicUpdatedHandler = null;
       }
 
       _currentSpinCompletion = new TaskCompletionSource<bool>();
 
       if (_currentSpinCompletion.Task.IsCompleted)
       {
-          Debug.LogWarning("[Spin] Spin task already marked as complete. Something went wrong.");
+        Debug.LogWarning("[Spin] Spin task already marked as complete. Something went wrong.");
       }
 
       _extrinsicUpdatedHandler = (id, info) => HandleExtrinsicUpdate(spinSubId, id, info);
@@ -210,8 +221,8 @@ namespace Assets.Scripts.ScreenStates
     {
       if (_currentSpinCompletion?.Task?.IsCompleted == true)
       {
-          Debug.Log("[Spin] Ignoring duplicate update after task completion.");
-          return;
+        Debug.Log("[Spin] Ignoring duplicate update after task completion.");
+        return;
       }
 
       Debug.Log($"[Spin] ExtrinsicUpdate triggered. spinSubId: {spinSubId}, received id: {id}, event: {info.TransactionEvent}");
@@ -268,7 +279,7 @@ namespace Assets.Scripts.ScreenStates
               }
               else
               {
-                _btnSpin.text = "Spin Again!";
+                _btnSpin.text = "Spin!";
                 _btnSpin.SetEnabled(true);
               }
             });
