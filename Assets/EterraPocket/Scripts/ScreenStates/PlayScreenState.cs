@@ -35,7 +35,7 @@ namespace Assets.Scripts.ScreenStates
 
         FlowController.VelContainer.Add(_instance);
 
-        FlowController.ChangeScreenSubState(GameScreen.PlayScreen, GameSubScreen.PlayInit);
+        FlowController.ChangeScreenSubState(GameScreen.PlayScreen, GameSubScreen.PlayRolling);
       }
       else
       {

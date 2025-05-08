@@ -43,8 +43,7 @@ namespace Assets.Scripts
     MainChoose,
     Play,
     PlayInit,
-    PlaySpinning,
-    PlayEnabled,
+    PlayRolling,
     PlayFinished,
     HistoryInit,
   }
@@ -76,7 +75,7 @@ namespace Assets.Scripts
 
         _substrate.InitializeMonitoring(_cts.Token);
       });
-      
+
 
       EterraConfig.Initialize((Eterra.NetApiExt.Generated.SubstrateClientExt)_substrate.ApiClient);
     }
@@ -123,8 +122,7 @@ namespace Assets.Scripts
       _stateDictionary.Add(GameScreen.PlayScreen, playScreen);
       _subStateDictionary.Add(GameScreen.PlayScreen, new Dictionary<GameSubScreen, IScreenState>
       {
-        { GameSubScreen.PlayInit, new PlayInitSubState(this, playScreen) },
-        { GameSubScreen.PlaySpinning, new PlaySpinningSubState(this, playScreen) },
+        { GameSubScreen.PlayRolling, new PlayRollingSubState(this, playScreen) },
         { GameSubScreen.PlayFinished, new PlayFinishedSubState(this, playScreen) },
       });
 

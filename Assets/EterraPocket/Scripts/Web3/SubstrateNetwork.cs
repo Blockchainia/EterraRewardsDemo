@@ -444,14 +444,23 @@ namespace Assets.Scripts
     {
       var extrinsicType = "EterraDailySlotsCalls.Roll";
 
-      if (!IsConnected || Account == null)
+      if (!IsConnected)
       {
+        Debug.LogError("[SpinSlotAsync] Network not connected.");
+        return null;
+      }
+
+      if (Account == null)
+      {
+        Debug.LogError("[SpinSlotAsync] Account is null.");
         return null;
       }
 
       var extrinsic = EterraDailySlotsCalls.Roll();
+      var subId = await GenericExtrinsicAsync(Account, extrinsicType, extrinsic, concurrentTasks, token);
 
-      return await GenericExtrinsicAsync(Account, extrinsicType, extrinsic, concurrentTasks, token);
+      Debug.Log($"[SpinSlotAsync] Submitted extrinsic, subId: {subId}");
+      return subId;
     }
 
     public async Task<string> SetReelWeightsAsync(Account account, BaseVec<BaseTuple<U32, U32>> weights, int concurrentTasks, CancellationToken token)
