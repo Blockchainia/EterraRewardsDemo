@@ -182,9 +182,10 @@ namespace Assets.Scripts.ScreenStates
 
       var player = Generic.ToAccountId32(_substrate.Account);
 
-      var blockResponse = await _substrate.ApiClient.Chain.GetBlockAsync(_cancellationToken);
-      var currentBlock = blockResponse?.Block?.Header?.Number?.Value ?? 0;
-      Debug.Log($"[Spin] Current block before spin submission: {currentBlock}");
+      var finalizedHash = await _substrate.ApiClient.Chain.GetFinalizedHeadAsync(_cancellationToken);
+      var finalizedBlockData = await _substrate.ApiClient.Chain.GetBlockAsync(finalizedHash, _cancellationToken);
+      var currentBlock = finalizedBlockData?.Block?.Header?.Number?.Value ?? 0;
+      Debug.Log($"[Spin] Current finalized block before spin: {currentBlock}");
 
       _currentSpinCompletion = null; // Reset before use to avoid stale state
       var spinSubId = await _substrate.SpinSlotAsync(player, 1, _cancellationToken);
@@ -210,91 +211,92 @@ namespace Assets.Scripts.ScreenStates
 
       _extrinsicUpdatedHandler = async (id, info) =>
       {
-          if (_currentSpinCompletion?.Task?.IsCompleted == true)
-          {
-              Debug.Log("[Spin] Ignoring duplicate update after task completion.");
-              return;
-          }
+        if (_currentSpinCompletion?.Task?.IsCompleted == true)
+        {
+          Debug.Log("[Spin] Ignoring duplicate update after task completion.");
+          return;
+        }
 
-          Debug.Log($"[Spin] ExtrinsicUpdate triggered. spinSubId: {spinSubId}, received id: {id}, event: {info.TransactionEvent}");
-          if (id != spinSubId || !(info.IsInBlock || info.IsCompleted))
-          {
-              Debug.Log($"[Spin] Ignoring update. Match: {id == spinSubId}, InBlock: {info.IsInBlock}, Completed: {info.IsCompleted}");
-              return;
-          }
+        Debug.Log($"[Spin] ExtrinsicUpdate triggered. spinSubId: {spinSubId}, received id: {id}, event: {info.TransactionEvent}");
+        if (id != spinSubId || !(info.IsInBlock || info.IsCompleted))
+        {
+          Debug.Log($"[Spin] Ignoring update. Match: {id == spinSubId}, InBlock: {info.IsInBlock}, Completed: {info.IsCompleted}");
+          return;
+        }
 
-          Debug.Log("[Spin] Spin extrinsic finalized or in block.");
-          Debug.Log("[Spin] Handling finalization. Setting completion task...");
+        Debug.Log("[Spin] Spin extrinsic finalized or in block.");
+        Debug.Log("[Spin] Handling finalization. Setting completion task...");
 
-          if (info.EventRecords != null)
+        if (info.EventRecords != null)
+        {
+          foreach (var rec in info.EventRecords)
           {
-              foreach (var rec in info.EventRecords)
+            var runtimeEvent = rec.Event as EnumRuntimeEvent;
+            if (runtimeEvent?.Value == RuntimeEvent.EterraDailySlots &&
+                runtimeEvent.Value2 is EnumEvent ev &&
+                ev.Value == Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Event.SlotRolled)
+            {
+              Debug.Log($"[Spin] Found SlotRolled event!");
+
+              // finalizedBlock = info.Index;
+              // Debug.Log($"[Spin] Extrinsic included in block: {finalizedBlock}");
+
+              var tuple = ev.Value2 as BaseTuple<AccountId32, BaseVec<U32>>;
+              if (tuple?.Value == null || tuple.Value.Length < 2) continue;
+
+              var reels = tuple.Value[1] as BaseVec<U32>;
+              var reelValues = reels?.Value?.Select(x => x.Value).ToArray();
+
+              UnityMainThreadDispatcher.Instance().Enqueue(() =>
               {
-                  var runtimeEvent = rec.Event as EnumRuntimeEvent;
-                  if (runtimeEvent?.Value == RuntimeEvent.EterraDailySlots &&
-                      runtimeEvent.Value2 is EnumEvent ev &&
-                      ev.Value == Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Event.SlotRolled)
-                  {
-                      Debug.Log($"[Spin] Found SlotRolled event!");
-    
-                      // finalizedBlock = info.Index;
-                      // Debug.Log($"[Spin] Extrinsic included in block: {finalizedBlock}");
+                _slot1.Q<Label>("LblSlot1").text = reelValues.Length > 0 ? reelValues[0].ToString() : "?";
+                _slot2.Q<Label>("LblSlot2").text = reelValues.Length > 1 ? reelValues[1].ToString() : "?";
+                _slot3.Q<Label>("LblSlot3").text = reelValues.Length > 2 ? reelValues[2].ToString() : "?";
+              });
 
-                      var tuple = ev.Value2 as BaseTuple<AccountId32, BaseVec<U32>>;
-                      if (tuple?.Value == null || tuple.Value.Length < 2) continue;
+              _pendingRollResult = false;
+              await WaitForRollHistoryToIncludeNewSpin();
+              await FetchAndDisplayLatestRoll();
 
-                      var reels = tuple.Value[1] as BaseVec<U32>;
-                      var reelValues = reels?.Value?.Select(x => x.Value).ToArray();
+              int rollsUsed = GameSharp.CurrentDailyRolls?.Length ?? 0;
+              int maxRolls = (int)(Eterra.Config.EterraConfig.MaxRollsPerRound?.Value ?? 3);
+              _currentPhase = SpinPhase.Init;
 
-                      UnityMainThreadDispatcher.Instance().Enqueue(() =>
-                      {
-                          _slot1.Q<Label>("LblSlot1").text = reelValues.Length > 0 ? reelValues[0].ToString() : "?";
-                          _slot2.Q<Label>("LblSlot2").text = reelValues.Length > 1 ? reelValues[1].ToString() : "?";
-                          _slot3.Q<Label>("LblSlot3").text = reelValues.Length > 2 ? reelValues[2].ToString() : "?";
-                      });
+              // Fetch finalized head and use it for accurate finalized block number
+              var finalizedHash = await _substrate.ApiClient.Chain.GetFinalizedHeadAsync(_cancellationToken);
+              var finalizedBlockData = await _substrate.ApiClient.Chain.GetBlockAsync(finalizedHash, _cancellationToken);
+              uint finalizedBlockNumber = (uint)(finalizedBlockData?.Block?.Header?.Number?.Value ?? 0);
 
-                      _pendingRollResult = false;
-                      await WaitForRollHistoryToIncludeNewSpin();
-                      await FetchAndDisplayLatestRoll();
+              Debug.Log($"[Spin] Finalized block determined from Chain API: {finalizedBlockNumber}");
 
-                      int rollsUsed = GameSharp.CurrentDailyRolls?.Length ?? 0;
-                      int maxRolls = (int)(Eterra.Config.EterraConfig.MaxRollsPerRound?.Value ?? 3);
-                      _currentPhase = SpinPhase.Init;
+              // Wait for the next block after finalization, and then one more to ensure safety
+              // await WaitForNextBlockAsync(finalizedBlockNumber);
+              await WaitForNextBlockAsync(finalizedBlockNumber + 5);
 
-                      // Fetch finalized head and use it for accurate finalized block number
-                      var finalizedHash = await _substrate.ApiClient.Chain.GetFinalizedHeadAsync(_cancellationToken);
-                      var finalizedBlockData = await _substrate.ApiClient.Chain.GetBlockAsync(finalizedHash, _cancellationToken);
-                      uint finalizedBlockNumber = (uint)(finalizedBlockData?.Block?.Header?.Number?.Value ?? 0);
+              UnityMainThreadDispatcher.Instance().Enqueue(() =>
+              {
+                if (rollsUsed >= maxRolls)
+                {
+                  FlowController.ChangeScreenSubState(GameScreen.PlayScreen, GameSubScreen.PlayFinished);
+                }
+                else
+                {
+                  _btnSpin.text = "Spin!";
+                  _btnSpin.SetEnabled(true);
+                }
+              });
 
-                      Debug.Log($"[Spin] Finalized block determined from Chain API: {finalizedBlockNumber}");
+              _currentSpinCompletion?.TrySetResult(true);
+              _substrate.ExtrinsicManager.ExtrinsicUpdated -= _extrinsicUpdatedHandler;
+              _extrinsicUpdatedHandler = null;
+              _currentSpinCompletion = null;
 
-                      // Wait for the next block after finalization
-                      await WaitForNextBlockAsync(finalizedBlockNumber);
-
-                      UnityMainThreadDispatcher.Instance().Enqueue(() =>
-                      {
-                          if (rollsUsed >= maxRolls)
-                          {
-                              FlowController.ChangeScreenSubState(GameScreen.PlayScreen, GameSubScreen.PlayFinished);
-                          }
-                          else
-                          {
-                              _btnSpin.text = "Spin!";
-                              _btnSpin.SetEnabled(true);
-                          }
-                      });
-
-                      _currentSpinCompletion?.TrySetResult(true);
-                      _substrate.ExtrinsicManager.ExtrinsicUpdated -= _extrinsicUpdatedHandler;
-                      _extrinsicUpdatedHandler = null;
-                      _currentSpinCompletion = null;
-
-                      return;
-                  }
-              }
+              return;
+            }
           }
+        }
 
-          Debug.LogWarning("[Spin] SlotRolled event not found in finalized extrinsic.");
+        Debug.LogWarning("[Spin] SlotRolled event not found in finalized extrinsic.");
       };
 
       _substrate.ExtrinsicManager.ExtrinsicUpdated += _extrinsicUpdatedHandler;
@@ -310,33 +312,33 @@ namespace Assets.Scripts.ScreenStates
 
       async Task WaitForNextBlockAsync(uint startingBlock)
       {
-          Debug.Log($"[Spin] Waiting for block after {startingBlock}...");
-          var seenNext = false;
+        Debug.Log($"[Spin] Waiting for block after {startingBlock}...");
+        var seenNext = false;
 
-          void OnBlock(uint b)
+        void OnBlock(uint b)
+        {
+          if (b > startingBlock)
           {
-              if (b > startingBlock)
-              {
-                  seenNext = true;
-                  Debug.Log($"[Spin] New block seen after extrinsic block: {b}");
-                  _substrate.OnNewBlock -= OnBlock;
-              }
+            seenNext = true;
+            Debug.Log($"[Spin] New block seen after extrinsic block: {b}");
+            _substrate.OnNewBlock -= OnBlock;
           }
+        }
 
-          _substrate.OnNewBlock += OnBlock;
+        _substrate.OnNewBlock += OnBlock;
 
-          int waited = 0;
-          while (!seenNext && waited < 10000)
-          {
-              await Task.Delay(250, _cancellationToken);
-              waited += 250;
-          }
+        int waited = 0;
+        while (!seenNext && waited < 20000)
+        {
+          await Task.Delay(250, _cancellationToken);
+          waited += 250;
+        }
 
-          if (!seenNext)
-          {
-              Debug.LogWarning($"[Spin] Timeout waiting for new block after {startingBlock}");
-              _substrate.OnNewBlock -= OnBlock;
-          }
+        if (!seenNext)
+        {
+          Debug.LogWarning($"[Spin] Timeout waiting for new block after {startingBlock}");
+          _substrate.OnNewBlock -= OnBlock;
+        }
       }
     }
 
