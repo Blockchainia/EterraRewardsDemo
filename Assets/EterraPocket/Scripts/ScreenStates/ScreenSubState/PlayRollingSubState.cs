@@ -197,104 +197,94 @@ namespace Assets.Scripts.ScreenStates
         return;
       }
 
+      _currentSpinCompletion = new TaskCompletionSource<bool>();
+
       if (_extrinsicUpdatedHandler != null)
       {
         _substrate.ExtrinsicManager.ExtrinsicUpdated -= _extrinsicUpdatedHandler;
-        _extrinsicUpdatedHandler = null;
       }
 
-      _currentSpinCompletion = new TaskCompletionSource<bool>();
-
-      if (_currentSpinCompletion.Task.IsCompleted)
+      _extrinsicUpdatedHandler = async (id, info) =>
       {
-        Debug.LogWarning("[Spin] Spin task already marked as complete. Something went wrong.");
-      }
+          if (_currentSpinCompletion?.Task?.IsCompleted == true)
+          {
+              Debug.Log("[Spin] Ignoring duplicate update after task completion.");
+              return;
+          }
 
-      _extrinsicUpdatedHandler = (id, info) => HandleExtrinsicUpdate(spinSubId, id, info);
+          Debug.Log($"[Spin] ExtrinsicUpdate triggered. spinSubId: {spinSubId}, received id: {id}, event: {info.TransactionEvent}");
+          if (id != spinSubId || !(info.IsInBlock || info.IsCompleted))
+          {
+              Debug.Log($"[Spin] Ignoring update. Match: {id == spinSubId}, InBlock: {info.IsInBlock}, Completed: {info.IsCompleted}");
+              return;
+          }
+
+          Debug.Log("[Spin] Spin extrinsic finalized or in block.");
+          Debug.Log("[Spin] Handling finalization. Setting completion task...");
+
+          if (info.EventRecords != null)
+          {
+              foreach (var rec in info.EventRecords)
+              {
+                  var runtimeEvent = rec.Event as EnumRuntimeEvent;
+                  if (runtimeEvent?.Value == RuntimeEvent.EterraDailySlots &&
+                      runtimeEvent.Value2 is EnumEvent ev &&
+                      ev.Value == Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Event.SlotRolled)
+                  {
+                      Debug.Log($"[Spin] Found SlotRolled event!");
+
+                      var tuple = ev.Value2 as BaseTuple<AccountId32, BaseVec<U32>>;
+                      if (tuple?.Value == null || tuple.Value.Length < 2) continue;
+
+                      var reels = tuple.Value[1] as BaseVec<U32>;
+                      var reelValues = reels?.Value?.Select(x => x.Value).ToArray();
+
+                      UnityMainThreadDispatcher.Instance().Enqueue(() =>
+                      {
+                          _slot1.Q<Label>("LblSlot1").text = reelValues.Length > 0 ? reelValues[0].ToString() : "?";
+                          _slot2.Q<Label>("LblSlot2").text = reelValues.Length > 1 ? reelValues[1].ToString() : "?";
+                          _slot3.Q<Label>("LblSlot3").text = reelValues.Length > 2 ? reelValues[2].ToString() : "?";
+                      });
+
+                      _pendingRollResult = false;
+                      await WaitForRollHistoryToIncludeNewSpin();
+                      await FetchAndDisplayLatestRoll();
+
+                      int rollsUsed = GameSharp.CurrentDailyRolls?.Length ?? 0;
+                      int maxRolls = (int)(Eterra.Config.EterraConfig.MaxRollsPerRound?.Value ?? 3);
+                      _currentPhase = SpinPhase.Init;
+
+                      UnityMainThreadDispatcher.Instance().Enqueue(() =>
+                      {
+                          if (rollsUsed >= maxRolls)
+                          {
+                              FlowController.ChangeScreenSubState(GameScreen.PlayScreen, GameSubScreen.PlayFinished);
+                          }
+                          else
+                          {
+                              _btnSpin.text = "Spin!";
+                              _btnSpin.SetEnabled(true);
+                          }
+                      });
+
+                      _currentSpinCompletion?.TrySetResult(true);
+                      _substrate.ExtrinsicManager.ExtrinsicUpdated -= _extrinsicUpdatedHandler;
+                      _extrinsicUpdatedHandler = null;
+                      _currentSpinCompletion = null;
+
+                      return;
+                  }
+              }
+          }
+
+          Debug.LogWarning("[Spin] SlotRolled event not found in finalized extrinsic.");
+      };
+
       _substrate.ExtrinsicManager.ExtrinsicUpdated += _extrinsicUpdatedHandler;
+
       Debug.Log("[Spin] ExtrinsicUpdated handler attached.");
 
       await _currentSpinCompletion.Task;
-    }
-
-    private async void HandleExtrinsicUpdate(string spinSubId, string id, ExtrinsicInfo info)
-    {
-      if (_currentSpinCompletion?.Task?.IsCompleted == true)
-      {
-        Debug.Log("[Spin] Ignoring duplicate update after task completion.");
-        return;
-      }
-
-      Debug.Log($"[Spin] ExtrinsicUpdate triggered. spinSubId: {spinSubId}, received id: {id}, event: {info.TransactionEvent}");
-      if (id != spinSubId || !(info.IsInBlock || info.IsCompleted))
-      {
-        Debug.Log($"[Spin] Ignoring update. Match: {id == spinSubId}, InBlock: {info.IsInBlock}, Completed: {info.IsCompleted}");
-        return;
-      }
-      Debug.Log("[Spin] Spin extrinsic finalized or in block.");
-      Debug.Log("[Spin] Handling finalization. Setting completion task...");
-
-      if (info.EventRecords != null)
-      {
-        foreach (var rec in info.EventRecords)
-        {
-          var runtimeEvent = rec.Event as EnumRuntimeEvent;
-          if (runtimeEvent == null) continue;
-
-          var runtimeModule = runtimeEvent.Value;
-          var decoded = runtimeEvent.Value2;
-
-          if (runtimeModule == RuntimeEvent.EterraDailySlots &&
-              decoded is EnumEvent palletEnumEv &&
-              palletEnumEv.Value == Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Event.SlotRolled)
-          {
-            Debug.Log($"[Spin] Found SlotRolled event!");
-
-            var tuple = palletEnumEv.Value2 as BaseTuple<AccountId32, BaseVec<U32>>;
-            if (tuple?.Value == null || tuple.Value.Length < 2) continue;
-
-            var reelsVec = tuple.Value[1] as BaseVec<U32>;
-            var reelValues = reelsVec?.Value?.Select(x => x.Value).ToArray();
-
-            UnityMainThreadDispatcher.Instance().Enqueue(() =>
-            {
-              _slot1.Q<Label>("LblSlot1").text = reelValues.Length > 0 ? reelValues[0].ToString() : "?";
-              _slot2.Q<Label>("LblSlot2").text = reelValues.Length > 1 ? reelValues[1].ToString() : "?";
-              _slot3.Q<Label>("LblSlot3").text = reelValues.Length > 2 ? reelValues[2].ToString() : "?";
-            });
-
-            _pendingRollResult = false;
-            await WaitForRollHistoryToIncludeNewSpin();
-            await FetchAndDisplayLatestRoll();
-
-            int rollsUsed = GameSharp.CurrentDailyRolls?.Length ?? 0;
-            int maxRolls = (int)(Eterra.Config.EterraConfig.MaxRollsPerRound?.Value ?? 3);
-            _currentPhase = SpinPhase.Init;
-
-            UnityMainThreadDispatcher.Instance().Enqueue(() =>
-            {
-              if (rollsUsed >= maxRolls)
-              {
-                FlowController.ChangeScreenSubState(GameScreen.PlayScreen, GameSubScreen.PlayFinished);
-              }
-              else
-              {
-                _btnSpin.text = "Spin!";
-                _btnSpin.SetEnabled(true);
-              }
-            });
-
-            _currentSpinCompletion?.TrySetResult(true);
-
-            _substrate.ExtrinsicManager.ExtrinsicUpdated -= _extrinsicUpdatedHandler;
-            _extrinsicUpdatedHandler = null;
-            _currentSpinCompletion = null;
-
-            return;
-          }
-        }
-      }
-      Debug.LogWarning("[Spin] SlotRolled event not found in finalized extrinsic.");
     }
 
     private async Task FetchAndDisplayLatestRoll()
