@@ -170,8 +170,6 @@ namespace Assets.Scripts.ScreenStates
         return;
       }
 
-      Debug.Log($"[Spin] Preparing to call SpinSlotAsync. Current nonce info (if available) will be logged inside SpinSlotAsync.");
-
       if (_substrate.Account == null)
       {
         Debug.LogError("[Spin] Substrate account is null. Aborting spin.");
@@ -183,6 +181,10 @@ namespace Assets.Scripts.ScreenStates
       }
 
       var player = Generic.ToAccountId32(_substrate.Account);
+
+      var blockResponse = await _substrate.ApiClient.Chain.GetBlockAsync(_cancellationToken);
+      var currentBlock = blockResponse?.Block?.Header?.Number?.Value ?? 0;
+      Debug.Log($"[Spin] Current block before spin submission: {currentBlock}");
 
       _currentSpinCompletion = null; // Reset before use to avoid stale state
       var spinSubId = await _substrate.SpinSlotAsync(player, 1, _cancellationToken);
@@ -203,6 +205,8 @@ namespace Assets.Scripts.ScreenStates
       {
         _substrate.ExtrinsicManager.ExtrinsicUpdated -= _extrinsicUpdatedHandler;
       }
+
+      // uint? finalizedBlock = null;
 
       _extrinsicUpdatedHandler = async (id, info) =>
       {
@@ -232,6 +236,9 @@ namespace Assets.Scripts.ScreenStates
                       ev.Value == Eterra.NetApiExt.Generated.Model.pallet_eterra_daily_slots.pallet.Event.SlotRolled)
                   {
                       Debug.Log($"[Spin] Found SlotRolled event!");
+    
+                      // finalizedBlock = info.Index;
+                      // Debug.Log($"[Spin] Extrinsic included in block: {finalizedBlock}");
 
                       var tuple = ev.Value2 as BaseTuple<AccountId32, BaseVec<U32>>;
                       if (tuple?.Value == null || tuple.Value.Length < 2) continue;
@@ -253,6 +260,16 @@ namespace Assets.Scripts.ScreenStates
                       int rollsUsed = GameSharp.CurrentDailyRolls?.Length ?? 0;
                       int maxRolls = (int)(Eterra.Config.EterraConfig.MaxRollsPerRound?.Value ?? 3);
                       _currentPhase = SpinPhase.Init;
+
+                      // Fetch finalized head and use it for accurate finalized block number
+                      var finalizedHash = await _substrate.ApiClient.Chain.GetFinalizedHeadAsync(_cancellationToken);
+                      var finalizedBlockData = await _substrate.ApiClient.Chain.GetBlockAsync(finalizedHash, _cancellationToken);
+                      uint finalizedBlockNumber = (uint)(finalizedBlockData?.Block?.Header?.Number?.Value ?? 0);
+
+                      Debug.Log($"[Spin] Finalized block determined from Chain API: {finalizedBlockNumber}");
+
+                      // Wait for the next block after finalization
+                      await WaitForNextBlockAsync(finalizedBlockNumber);
 
                       UnityMainThreadDispatcher.Instance().Enqueue(() =>
                       {
@@ -285,6 +302,42 @@ namespace Assets.Scripts.ScreenStates
       Debug.Log("[Spin] ExtrinsicUpdated handler attached.");
 
       await _currentSpinCompletion.Task;
+
+      // if (finalizedBlock != null)
+      // {
+      //     await WaitForNextBlockAsync(finalizedBlock ?? 0);
+      // }
+
+      async Task WaitForNextBlockAsync(uint startingBlock)
+      {
+          Debug.Log($"[Spin] Waiting for block after {startingBlock}...");
+          var seenNext = false;
+
+          void OnBlock(uint b)
+          {
+              if (b > startingBlock)
+              {
+                  seenNext = true;
+                  Debug.Log($"[Spin] New block seen after extrinsic block: {b}");
+                  _substrate.OnNewBlock -= OnBlock;
+              }
+          }
+
+          _substrate.OnNewBlock += OnBlock;
+
+          int waited = 0;
+          while (!seenNext && waited < 10000)
+          {
+              await Task.Delay(250, _cancellationToken);
+              waited += 250;
+          }
+
+          if (!seenNext)
+          {
+              Debug.LogWarning($"[Spin] Timeout waiting for new block after {startingBlock}");
+              _substrate.OnNewBlock -= OnBlock;
+          }
+      }
     }
 
     private async Task FetchAndDisplayLatestRoll()
